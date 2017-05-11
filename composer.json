@@ -1,0 +1,17 @@
+{
+    "name": "unimatrix/backend",
+    "description": "Backend for Cake 3.4",
+    "type": "cakephp-plugin",
+    "homepage": "http://venture.unimatrix.ro",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.0.0",
+        "cakephp/cakephp": ">=3.4",
+        "unimatrix/cake": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Unimatrix\\Backend\\": "src"
+        }
+    }
+}
