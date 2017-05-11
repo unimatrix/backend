@@ -1,6 +1,6 @@
 {
     "name": "unimatrix/backend",
-    "description": "Backend for Cake 3.4",
+    "description": "Backend for CakePHP 3.4",
     "type": "cakephp-plugin",
     "homepage": "http://venture.unimatrix.ro",
     "license": "MIT",
