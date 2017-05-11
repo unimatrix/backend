@@ -1,0 +1,54 @@
+/**
+ * Picky widget
+ *
+ * @author Flavius
+ * @version 0.1
+ */
+div.picky-widget {
+    position: relative;
+}
+
+    /** Pick list **/
+    div.picky-widget > div.list {
+        margin: 0 0 1rem;
+        font-size: .875rem;
+    }
+
+        div.picky-widget > div.list > pick {
+            display: inline-block;
+            margin: 0px 5px 5px 0px;
+            vertical-align: top;
+            position: relative;
+            cursor: pointer;
+            background: #e8e8e8;
+        }
+
+        div.picky-widget > div.list > pick.active {
+            background: #9631e3;
+        }
+
+            div.picky-widget > div.list > pick > div {
+                vertical-align: top;
+                position: relative;
+                box-sizing: border-box;
+                max-width: 100%;
+                padding: 0.3em 0.5em;
+                color: black;
+            }
+
+            div.picky-widget > div.list > pick.active > div {
+                color: #fff;
+            }
+
+                div.picky-widget > div.list > pick > div > span {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 100%;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }

@@ -1,0 +1,162 @@
+/**
+ * Tag widget
+ *
+ * @author Flavius
+ * @version 0.1
+ */
+div.tag-widget {
+    position: relative;
+}
+
+    /** Tag list **/
+    div.tag-widget > div.list {
+        margin: 0 0 1rem;
+        font-size: .875rem;
+    }
+
+    div.tag-widget > div.list.hidden {
+        display: none;
+    }
+
+        div.tag-widget > div.list > label {
+            font-style: italic;
+        }
+
+        div.tag-widget > div.list > tag {
+            display: inline-block;
+            margin: 0px 5px 5px 0px;
+            vertical-align: top;
+            position: relative;
+            cursor: pointer;
+            background: #e8e8e8;
+            -webkit-animation: none;
+            animation: none;
+        }
+
+        div.tag-widget > div.list > tag.hidden {
+            width: 0 !important;
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: 0;
+            margin-right: 0;
+            opacity: 0;
+            -webkit-transform: scale(0);
+            -ms-transform: scale(0);
+            transform: scale(0);
+            -webkit-transition: .3s;
+            transition: .3s;
+            pointer-events: none;
+        }
+
+            div.tag-widget > div.list > tag > div {
+                vertical-align: top;
+                position: relative;
+                box-sizing: border-box;
+                max-width: 100%;
+                padding: 0.3em 0.5em;
+                color: black;
+            }
+
+                div.tag-widget > div.list > tag > div > span {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 100%;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+
+    /** Tagify overwrites **/
+    div.tag-widget > tags {
+        padding: 0;
+        box-sizing: border-box;
+        width: 100%;
+        border-color: #cacaca;
+        margin: 0 0 1rem;
+        font-family: inherit;
+        font-size: .875rem;
+        line-height: 1.5;
+        color: #0a0a0a;
+        background-color: #fefefe;
+        box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+        transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+    div.tag-widget > tags.active {
+        border-color: #8a8a8a;
+        box-shadow: 0 0 5px #cacaca;
+        outline: none;
+    }
+
+        div.tag-widget > tags > div {
+            padding: 6px 21px 7px 7px;
+        }
+
+            div.tag-widget > tags > div > input {
+                padding: 0px;
+            }
+
+            div.tag-widget > tags > div > span {
+                line-height: 2;
+            }
+
+        div.tag-widget > tags > tag {
+            background: #e8e8e8;
+            -webkit-animation: none;
+            animation: none;
+        }
+
+            div.tag-widget > tags > tag > x {
+                line-height: 15px;
+                right: calc(0.5em - 3px);
+            }
+
+            div.tag-widget > tags > tag > x:hover {
+                background: #e0115f;
+            }
+
+            div.tag-widget > tags > tag x:hover + div > span {
+                opacity: 1;
+            }
+
+            div.tag-widget > tags > tag > div::before {
+                content: none;
+            }
+
+                div.tag-widget > tags > tag > div > span {
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+
+            div.tag-widget > tags > tag.tagify--mark > div {
+                animation: .4s tagify--pulse 3 ease-out;
+            }
+
+            div.tag-widget > tags > tag.tagify--notAllowed > div {
+                box-shadow: 0 0 0 20px #e0115f inset;
+            }
+
+                div.tag-widget > tags > tag.tagify--notAllowed > div > span {
+                    opacity: 1;
+                    color: #fff;
+                }
+
+@-webkit-keyframes tagify--pulse {
+    50% {
+        box-shadow: 0 0 0 2px #e0115f inset;
+    }
+}
+
+@keyframes tagify--pulse {
+    50% {
+        box-shadow: 0 0 0 2px #e0115f inset;
+    }
+}
