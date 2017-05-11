@@ -24,3 +24,56 @@ Don't forget to add it to bootstrap
 ```
 Plugin::load('Unimatrix/Backend', ['routes' => true, 'bootstrap' => true]);
 ```
+
+## Configuration
+
+Of course you have to add some things in your `config/app.php`
+```
+    /**
+     * Backend settings
+     *
+     * - security - Enables security modules, if ssl is set to true backend wont load without https
+     * - credentials - The backend auth credentials that will allow you to login
+     * - ckfinder - License information for ckfinder and backend settings
+     *       - http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_backends
+     */
+    'Backend' => [
+        'security' => [
+            'enabled' => true,
+            'ssl' => false
+        ],
+        'credentials' => [
+            'username' => 'user',
+            'password' => 'pass'
+        ],
+        'ckfinder' => [
+            'license' => 'your-license',
+            'key' => 'your-license-key',
+            'tmp' => TMP,
+            'backend' => [
+                'name' => 'default',
+                'adapter' => 'local',
+                'baseUrl' => '/up/',
+                'root' => WWW_ROOT . 'up',
+                'chmodFiles' => 0777,
+                'chmodFolders' => 0755,
+                'filesystemEncoding' => 'UTF-8',
+            ]
+        ],
+    ],
+ ```
+
+## Usage
+
+To use the backend plugin you have to add a prefix in your `config/routes.php`
+
+Login is handled by the plugin but the rest of the controllers / modules can be in your application under src/controller/backend
+
+```
+// backend
+Router::prefix('backend', function(RouteBuilder $routes) {
+    $routes->connect('/', ['controller' => 'Dashboard', 'action' => 'index']);
+    $routes->fallbacks(DashedRoute::class);
+});
+```
+
