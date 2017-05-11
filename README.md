@@ -19,3 +19,8 @@ The recommended way to install composer packages is:
 ```
 composer require unimatrix/backend:~1.0
 ```
+
+Don't forget to add it to bootstrap
+```
+Plugin::load('Unimatrix/Backend', ['routes' => true, 'bootstrap' => true]);
+```
