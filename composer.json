@@ -19,7 +19,7 @@
         "monolog/monolog": "~1.4,>=1.4.1",
         "pear/http_request2": "*",
         "pear/mail_mime": "*",
-        "pear/mail_mimedecode": "*",
+        "pear/mail_mime-decode": "*",
         "pimple/pimple": "~3.0",
         "symfony/event-dispatcher": ">=2.4,<=2.8-dev",
         "symfony/http-foundation": ">=2.4,<=2.8-dev",
