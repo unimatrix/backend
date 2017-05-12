@@ -45,7 +45,7 @@ div.media-widget {
         }
 
         div.media-widget > div.list > media.media--mark {
-            animation: .6s media--pulse 3 ease-out;
+            animation: .4s media--pulse 3 ease-out;
         }
 
         div.media-widget > div.list > media:hover {
@@ -115,11 +115,13 @@ div.media-widget {
 @-webkit-keyframes media--pulse {
     50% {
         border-color: #e0115f;
+        box-shadow: 0 0 0 1px #e0115f inset;
     }
 }
 
 @keyframes media--pulse {
     50% {
         border-color: #e0115f;
+        box-shadow: 0 0 0 1px #e0115f inset;
     }
 }

@@ -54,19 +54,19 @@ Widgets.media = function() { 'use strict';
     }, _add = function(ctrl, value) {
         // multiple rule?
         if(ctrl.container.hasClass('multiple')) {
-            // from new? clone it
-            if(ctrl.media.hasClass('new')) {
-                // found duplicate?
-                let dupe = _duplicate(ctrl.container, value);
-                if(dupe) {
-                    var found = $('#'+ dupe);
-                    found.addClass('media--mark');
-                    window.setTimeout(function() {
-                        found.removeClass('media--mark');
-                    }, 2000);
+            // found duplicate?
+            let dupe = _duplicate(ctrl.container, value);
+            if(dupe) {
+                var found = $('#'+ dupe);
+                found.addClass('media--mark');
+                window.setTimeout(function() {
+                    found.removeClass('media--mark');
+                }, 2000);
 
-                // no duplicate
-                } else {
+            // no duplicate
+            } else {
+                // from new? clone it
+                if(ctrl.media.hasClass('new')) {
                     let clone = ctrl.media.clone();
 
                     // change cloned attributes and add uuid
@@ -81,12 +81,11 @@ Widgets.media = function() { 'use strict';
                     // bind events and update config
                     _bind(clone);
                     _update();
+                // existing
+                } else {
+                    ctrl.media.find('img').attr('src', value);
+                    ctrl.media.find('a').attr('href', value);
                 }
-
-            // existing
-            } else {
-                ctrl.media.find('img').attr('src', value);
-                ctrl.media.find('a').attr('href', value);
             }
 
             // update multiple values
