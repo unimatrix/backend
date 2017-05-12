@@ -14,16 +14,10 @@ use Unimatrix\Backend\Form\Backend\SearchForm;
  * it also handles some custom backend logic and request filtering
  *
  * @author Flavius
- * @version 0.1
+ * @version 0.2
  */
 class AdminComponent extends Component
 {
-    /**
-     * Holds the controller
-     * @var \Cake\Controller\Controller
-     */
-    protected $_Ctrl;
-
     /**
      * {@inheritDoc}
      * @see \Cake\Controller\Component::initialize()
@@ -31,23 +25,20 @@ class AdminComponent extends Component
     public function initialize(array $config) {
         parent::initialize($config);
 
-        // set controller
-        $this->_Ctrl = $this->getController();
-
         // load security
         if(Configure::read('Backend.security.enabled')) {
-            $this->_Ctrl->loadComponent('Security');
+            $this->getController()->loadComponent('Security');
             if(Configure::read('Backend.security.ssl'))
-                $this->_Ctrl->Security->requireSecure();
-            $this->_Ctrl->loadComponent('Csrf', [
+                $this->getController()->Security->requireSecure();
+            $this->getController()->loadComponent('Csrf', [
                 'httpOnly' => true,
                 'secure' => env('HTTPS')
             ]);
         }
 
         // load required components
-        $this->_Ctrl->loadComponent('Unimatrix/Backend.Flash');
-        $this->_Ctrl->loadComponent('Unimatrix/Backend.Auth');
+        $this->getController()->loadComponent('Unimatrix/Backend.Flash');
+        $this->getController()->loadComponent('Unimatrix/Backend.Auth');
     }
 
     /**
@@ -56,7 +47,7 @@ class AdminComponent extends Component
      */
     public function startup(Event $event) {
         // fix incomming data from widgets
-        $request = $this->_Ctrl->request;
+        $request = $this->getController()->request;
         if($request->is('post')) {
             $body = $request->getParsedBody();
             if(is_array($body)) {
@@ -80,7 +71,7 @@ class AdminComponent extends Component
 
                 // request changed, overwrite request
                 if($dirty)
-                    $this->_Ctrl->request = $request->withParsedBody($body);
+                    $this->getController()->request = $request->withParsedBody($body);
             }
         }
     }
@@ -108,7 +99,7 @@ class AdminComponent extends Component
         $this->fields = $fields;
 
         // on post
-        $request = $this->_Ctrl->request;
+        $request = $this->getController()->request;
         if($request->is('post')) {
             // mix and match query params with post search data
             $params = $request->getQueryParams();
@@ -128,7 +119,7 @@ class AdminComponent extends Component
                 $target .= '?' . $uri->getQuery();
 
             // redirect with brand new GET params
-            $this->_Ctrl->redirect($target);
+            $this->getController()->redirect($target);
 
         // on get
         } else {
@@ -136,8 +127,8 @@ class AdminComponent extends Component
             $term = $request->getQuery('search');
             if($term) {
                 // fill value and execute form
-                $this->_Ctrl->request = $request->withData('search', $term);
-                if($search->execute($this->_Ctrl->request->getData())) {
+                $this->getController()->request = $request->withData('search', $term);
+                if($search->execute($this->getController()->request->getData())) {
                     // do conditions
                     if(strpos($term, '||') !== false || strpos($term, '&&') !== false) {
                         foreach(explode('||', $term) as $one) {
@@ -152,8 +143,8 @@ class AdminComponent extends Component
         }
 
         // send to template
-        $this->_Ctrl->set('search', $search);
-        $this->_Ctrl->set('highlight', $this->highlight);
+        $this->getController()->set('search', $search);
+        $this->getController()->set('highlight', $this->highlight);
 
         // return computed conditions
         return $conditions;

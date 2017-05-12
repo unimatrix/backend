@@ -13,7 +13,7 @@ use Unimatrix\Cake\Lib\Lexicon;
  * it also handles some custom backend logic and template correction
  *
  * @author Flavius
- * @version 0.1
+ * @version 0.2
  */
 class AdminHelper extends Helper {
     // load other helpers
@@ -27,9 +27,9 @@ class AdminHelper extends Helper {
         parent::initialize($config);
 
         // load required helpers
-        $this->_View->loadHelper('Unimatrix/Cake.Minify');
-        $this->_View->loadHelper('Unimatrix/Cake.Debug');
-        $this->_View->loadHelper('Unimatrix/Backend.Form', ['widgets' => [
+        $this->getView()->loadHelper('Unimatrix/Cake.Minify');
+        $this->getView()->loadHelper('Unimatrix/Cake.Debug');
+        $this->getView()->loadHelper('Unimatrix/Backend.Form', ['widgets' => [
             'tag' => ['Unimatrix/Backend.Tag'],
             'moment' => ['Unimatrix/Backend.Moment'],
             'wysiwyg' => ['Unimatrix/Backend.Wysiwyg'],
@@ -46,7 +46,7 @@ class AdminHelper extends Helper {
      */
     public function beforeRender(Event $event, $viewFile) {
         // switch layout to backend
-        $this->_View->layout('Unimatrix/Backend.backend');
+        $this->getView()->layout('Unimatrix/Backend.backend');
     }
 
     /**
@@ -63,7 +63,7 @@ class AdminHelper extends Helper {
             $value = $entity->get($field);
 
         // no highlight for this field? return truncated text (if truncated)
-        $highlight = $this->_View->get('highlight') ? $this->_View->get('highlight') : [];
+        $highlight = $this->getView()->get('highlight') ? $this->getView()->get('highlight') : [];
         if(!isset($highlight[$field])) {
             if($truncate)
                 $value = $this->Text->truncate($value, $truncate, ['html' => true]);

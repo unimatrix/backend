@@ -15,7 +15,7 @@ use Cake\View\Form\ContextInterface;
  * echo $this->Form->control('body', ['type' => 'wysiwyg']);
  *
  * @author Flavius
- * @version 0.1
+ * @version 0.2
  */
 class WysiwygWidget extends BasicWidget
 {
@@ -32,7 +32,7 @@ class WysiwygWidget extends BasicWidget
     /**
      * Load prerequisites
      * @param View $view - The view object
-     * @return string - CK paths
+     * @return array - CK paths
      */
     public function require(View $view) {
         // load prerequisites
@@ -47,11 +47,10 @@ class WysiwygWidget extends BasicWidget
         }
 
         // figure out ckeditor and ckfinder path
-        $path = null;
+        $path = [];
         if(!is_null($ckeditor) && !is_null($ckfinder)) {
-            $editorPath = dirname($view->Url->script($ckeditor));
-            $finderPath = dirname($view->Url->script($ckfinder));
-            $path = $view->Minify->inline('script', "var CKEDITOR_BASEPATH = '{$editorPath}/', CKFINDER_BASEPATH = '{$finderPath}/';", true);
+            $path[] = $view->Minify->inline('script', "var CKEDITOR_BASEPATH = '" . dirname($view->Url->script($ckeditor)). "/';", true);
+            $path[] = $view->Minify->inline('script', "var CKFINDER_BASEPATH = '" . dirname($view->Url->script($ckfinder)). "/';", true);
         }
 
         // return ckeditor and ckfinder paths
@@ -84,7 +83,7 @@ class WysiwygWidget extends BasicWidget
         ];
 
         // require prerequisites
-        $ckpath = $this->require($data['view']);
+        list($editorPath, $finderPath) = $this->require($data['view']);
         unset($data['view']);
 
         // create the textarea
@@ -99,6 +98,6 @@ class WysiwygWidget extends BasicWidget
         ]);
 
         // render
-        return "<div class='wysiwyg-widget'>" . $textarea . $ckpath . '</div>';
+        return "<div class='wysiwyg-widget'>" . $textarea . $editorPath . $finderPath . '</div>';
     }
 }

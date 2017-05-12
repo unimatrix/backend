@@ -19,7 +19,7 @@ use RuntimeException;
  * echo $this->Form->control('media2', ['type' => 'media', 'multiple' => true]);
  *
  * @author Flavius
- * @version 0.1
+ * @version 0.2
  */
 class MediaWidget extends BasicWidget
 {
@@ -54,10 +54,8 @@ class MediaWidget extends BasicWidget
 
         // figure out ckeditor and ckfinder path
         $path = null;
-        if(!is_null($ckfinder)) {
-            $finderPath = dirname($view->Url->script($ckfinder));
-            $path = $view->Minify->inline('script', "var CKFINDER_BASEPATH = '{$finderPath}/';", true);
-        }
+        if(!is_null($ckfinder))
+            $path = $view->Minify->inline('script', "var CKFINDER_BASEPATH = '" . dirname($view->Url->script($ckfinder)). "/';", true);
 
         // return ckeditor and ckfinder paths
         return $path;
@@ -151,10 +149,10 @@ class MediaWidget extends BasicWidget
         $list .= '</div>';
 
         // require prerequisites
-        $ckpath = $this->require($data['view']);
+        $finderPath = $this->require($data['view']);
         unset($data['view']);
 
         // return the actual template for this input type
-        return "<div class='media-widget{$multiple}'>" . $list . $inputs . $ckpath . '</div>';
+        return "<div class='media-widget{$multiple}'>" . $list . $inputs . $finderPath . '</div>';
     }
 }
