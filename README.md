@@ -34,7 +34,7 @@ Of course you have to add some things in your `config/app.php`
      *
      * - security - Enables security modules, if ssl is set to true backend wont load without https
      * - credentials - The backend auth credentials that will allow you to login
-     * - ckfinder - License information for ckfinder and backend settings
+     * - ckfinder - License information for ckfinder and backend settings (only local or ftp supported)
      *       - http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_backends
      */
     'Backend' => [
