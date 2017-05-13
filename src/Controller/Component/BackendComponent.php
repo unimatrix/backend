@@ -9,14 +9,14 @@ use Cake\Controller\Component;
 use Unimatrix\Backend\Form\Backend\SearchForm;
 
 /**
- * Admin Component
+ * Backend Component
  * This component loads all other necesary stuff for the backend,
  * it also handles some custom backend logic and request filtering
  *
  * @author Flavius
  * @version 0.2
  */
-class AdminComponent extends Component
+class BackendComponent extends Component
 {
     /**
      * {@inheritDoc}

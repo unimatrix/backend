@@ -8,14 +8,14 @@ use Cake\ORM\Entity;
 use Unimatrix\Cake\Lib\Lexicon;
 
 /**
- * Admin Helper
+ * Backend Helper
  * This helper loads all other necesary stuff for the backend,
  * it also handles some custom backend logic and template correction
  *
  * @author Flavius
  * @version 0.2
  */
-class AdminHelper extends Helper {
+class BackendHelper extends Helper {
     // load other helpers
     public $helpers = ['Text'];
 

@@ -11,7 +11,7 @@ $project = [
 
     // javascript
     'js' => [
-        'Unimatrix/Cake.jquery/jquery.min.js',
+        'Unimatrix/Backend.jquery/jquery.min.js',
         'Unimatrix/Backend.backend/foundation.min.js',
         'Unimatrix/Backend.backend.js'
     ]
