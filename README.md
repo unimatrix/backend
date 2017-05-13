@@ -59,7 +59,7 @@ Of course you have to add some things in your `config/app.php`
                 'chmodFolders' => 0755,
                 'filesystemEncoding' => 'UTF-8',
             ]
-        ],
+        ]
     ],
  ```
 
