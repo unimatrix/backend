@@ -10,7 +10,7 @@ use Cake\Controller\Component\FlashComponent as CakeFlashComponent;
  * These templates are sexy and require some javascript magic (from backend.js)
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 class FlashComponent extends CakeFlashComponent
 {

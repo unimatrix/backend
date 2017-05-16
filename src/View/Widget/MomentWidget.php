@@ -20,7 +20,7 @@ use DateTimeInterface;
  * echo $this->Form->control('date3', ['type' => 'moment', 'mode' => 'time']);
  *
  * @author Flavius
- * @version 0.3
+ * @version 1.2
  */
 class MomentWidget extends BasicWidget
 {

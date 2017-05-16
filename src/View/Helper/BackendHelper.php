@@ -13,7 +13,7 @@ use Unimatrix\Cake\Lib\Lexicon;
  * it also handles some custom backend logic and template correction
  *
  * @author Flavius
- * @version 0.2
+ * @version 1.1
  */
 class BackendHelper extends Helper {
     // load other helpers

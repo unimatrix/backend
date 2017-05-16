@@ -2,7 +2,7 @@
  * Wysiwyg widget
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 if(typeof Widgets === 'undefined') var Widgets = {};
 Widgets.wysiwyg = function() { 'use strict';
@@ -59,4 +59,4 @@ Widgets.wysiwyg = function() { 'use strict';
 }();
 
 // init widget on ready
-$(document).ready(Widgets.wysiwyg.init);
+$(Widgets.wysiwyg.init);

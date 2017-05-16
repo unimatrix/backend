@@ -2,7 +2,7 @@
  * Backend
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 var dump = function(what) { 'use strict';
     if(typeof console != 'undefined')
@@ -11,6 +11,7 @@ var dump = function(what) { 'use strict';
 
 var Backend = function() { 'use strict';
     var store = {
+        version: '1.0'
 
     // flash message autoclose and binds
     }, _flash = function() {
@@ -62,6 +63,12 @@ var Backend = function() { 'use strict';
 
     // init
     }, __construct = function() {
+        // copyright
+        dump("+-------------------------------------------+");
+        dump('| Unimatrix Venture Digital Platform System | ');
+        dump('| version '+ store.version +' | http://venture.unimatrix.ro |');
+        dump("+-------------------------------------------+");
+        
     	// initiate foundation
     	$(document).foundation();
 
@@ -78,4 +85,4 @@ var Backend = function() { 'use strict';
 }();
 
 // init frontend on ready
-$(document).ready(Backend.init);
+$(Backend.init);

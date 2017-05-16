@@ -13,7 +13,7 @@ use RuntimeException;
  * This class is used to authenticate a user (credentials are specified in config) in the backend area
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 class BackendAuthenticate extends BaseAuthenticate
 {

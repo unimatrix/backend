@@ -19,7 +19,7 @@ use RuntimeException;
  * echo $this->Form->control('media2', ['type' => 'media', 'multiple' => true]);
  *
  * @author Flavius
- * @version 0.2
+ * @version 1.1
  */
 class MediaWidget extends BasicWidget
 {

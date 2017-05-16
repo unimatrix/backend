@@ -70,7 +70,7 @@ $project = [
     </section>
     <footer>
         <div class="large-3 medium-4 columns">Generated in: <?= $this->Number->precision($this->Debug->requestTime() * 1000, 0) ?> ms</div>
-        <div class="large-9 medium-8 columns text-center">&copy; 2016-<?= date('Y') ?> <?php echo $this->Html->link('Unimatrix Venture Digital Platform System', 'http://venture.unimatrix.ro') ?></div>
+        <div class="large-9 medium-8 columns text-center">&copy; 2016-<?= date('Y') ?>&nbsp;<?php echo $this->Html->link('Unimatrix Venture Digital Platform System', 'http://venture.unimatrix.ro') ?></div>
     </footer>
     <?php
         // js

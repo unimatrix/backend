@@ -11,7 +11,7 @@ use Cake\View\View;
  * to some of our widgets that need it to load assets
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 class FormHelper extends CakeFormHelper
 {

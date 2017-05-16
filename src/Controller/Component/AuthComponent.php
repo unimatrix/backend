@@ -11,7 +11,7 @@ use Cake\Controller\Component\AuthComponent as CakeAuthComponent;
  * Overwrite default Auth Component and add backend config and autologin
  *
  * @author Flavius
- * @version 0.2
+ * @version 1.1
  */
 class AuthComponent extends CakeAuthComponent
 {

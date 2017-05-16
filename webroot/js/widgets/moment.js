@@ -2,7 +2,7 @@
  * Moment widget
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 if(typeof Widgets === 'undefined') var Widgets = {};
 Widgets.moment = function() { 'use strict';
@@ -84,4 +84,4 @@ Widgets.moment = function() { 'use strict';
 }();
 
 // init widget on ready
-$(document).ready(Widgets.moment.init);
+$(Widgets.moment.init);

@@ -15,7 +15,7 @@ use Cake\View\Form\ContextInterface;
  * echo $this->Form->control('tags', ['type' => 'tag', 'list' => 'One Tag, Another Tag', 'placeholder' => 'Add tag...'])
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 class TagWidget extends BasicWidget
 {

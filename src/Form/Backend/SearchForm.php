@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
  * The search form used for every table out there
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 class SearchForm extends Form
 {

@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.0.0",
-        "cakephp/cakephp": ">=3.4",
+        "cakephp/cakephp": "~3.4",
         "unimatrix/cake": "~1.0",
         "unimatrix/ckfinder": "~1.0"
     },

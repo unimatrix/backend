@@ -2,7 +2,7 @@
  * Media widget
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.1
  */
 if(typeof Widgets === 'undefined') var Widgets = {};
 Widgets.media = function() { 'use strict';
@@ -207,4 +207,4 @@ Widgets.media = function() { 'use strict';
 }();
 
 // init widget on ready
-$(document).ready(Widgets.media.init);
+$(Widgets.media.init);

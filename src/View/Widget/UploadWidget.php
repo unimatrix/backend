@@ -38,7 +38,7 @@ use Cake\View\Form\ContextInterface;
  *     ->allowEmpty('file', 'update');
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 class UploadWidget extends FileWidget
 {

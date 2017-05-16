@@ -14,7 +14,7 @@ use Unimatrix\Backend\Form\Backend\SearchForm;
  * it also handles some custom backend logic and request filtering
  *
  * @author Flavius
- * @version 0.2
+ * @version 1.1
  */
 class BackendComponent extends Component
 {

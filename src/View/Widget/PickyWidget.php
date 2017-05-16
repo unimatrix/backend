@@ -17,7 +17,7 @@ use RuntimeException;
  * echo $this->Form->control('pick', ['type' => 'picky', 'list' => ['item1', 'item2', 'item3', 'item4']])
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 class PickyWidget extends BasicWidget
 {

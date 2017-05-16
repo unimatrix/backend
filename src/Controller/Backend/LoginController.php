@@ -9,7 +9,7 @@ use Unimatrix\Backend\Controller\AppController;
  * Handles login and logout
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 class LoginController extends AppController
 {

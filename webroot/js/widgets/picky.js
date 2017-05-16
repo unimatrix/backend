@@ -2,7 +2,7 @@
  * Picky widget
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 if(typeof Widgets === 'undefined') var Widgets = {};
 Widgets.picky = function() { 'use strict';
@@ -49,4 +49,4 @@ Widgets.picky = function() { 'use strict';
 }();
 
 //init widget on ready
-$(document).ready(Widgets.picky.init);
+$(Widgets.picky.init);

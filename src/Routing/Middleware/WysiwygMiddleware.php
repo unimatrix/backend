@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * This middleware will serve the ckfinder php correctly
  *
  * @author Flavius
- * @version 0.1
+ * @version 1.0
  */
 class WysiwygMiddleware
 {
