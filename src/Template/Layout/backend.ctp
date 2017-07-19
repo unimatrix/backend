@@ -4,6 +4,7 @@
 $project = [
     // styles
     'css' => [
+        'Unimatrix/Backend.fonts/roboto.min.css',
         'Unimatrix/Backend.fonts/awesome.min.css',
         'Unimatrix/Backend.backend/foundation.min.css',
         'Unimatrix/Backend.backend.css'

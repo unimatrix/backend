@@ -21,6 +21,7 @@ div.picky-widget {
             position: relative;
             cursor: pointer;
             background: #e8e8e8;
+            transition: background .25s ease-in-out;
         }
 
         div.picky-widget > div.list > pick.active {
@@ -34,6 +35,7 @@ div.picky-widget {
                 max-width: 100%;
                 padding: 0.3em 0.5em;
                 color: black;
+                transition: color .25s ease-in-out;
             }
 
             div.picky-widget > div.list > pick.active > div {

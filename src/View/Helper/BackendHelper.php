@@ -35,7 +35,8 @@ class BackendHelper extends Helper {
             'wysiwyg' => ['Unimatrix/Backend.Wysiwyg'],
             'picky' => ['Unimatrix/Backend.Picky'],
             'media' => ['Unimatrix/Backend.Media'],
-            'upload' => ['Unimatrix/Backend.Upload']
+            'upload' => ['Unimatrix/Backend.Upload'],
+            'stepper' => ['Unimatrix/Backend.Stepper']
         ]]);
     }
 
