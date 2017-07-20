@@ -91,7 +91,7 @@ class CalendarWidget extends BasicWidget
         $input = $this->_templates->format('input', [
             'name' => '_calendar_input_' . $data['name'],
             'type' => 'text',
-            'attrs' => $this->_templates->formatAttributes($data, ['type', 'name', 'mode']),
+            'attrs' => $this->_templates->formatAttributes($data, ['type', 'name']),
         ]);
 
         // return the actual template for this input type
