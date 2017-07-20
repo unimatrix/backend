@@ -53,19 +53,17 @@ class BackendComponent extends Component
             if(is_array($body)) {
                 $dirty = false;
                 foreach($body as $name => $value) {
-                    // moment widget
-                    if(substr($name, 0, 12) === '_fake_input_') {
-                        $dirty = true;
+                    // calendar widget
+                    if(substr($name, 0, 16) === '_calendar_input_') {
+                        $body[substr($name, 16)] = new FrozenTime($body[$name]);
                         unset($body[$name]);
-                        $real = substr($name, 12);
-                        if($body[$real])
-                            $body[$real] = new FrozenTime($body[$real]);
+                        $dirty = true;
                     }
 
                     // picky & media widget
                     if(is_array($value) && in_array('_to_empty_array_', $value, true)) {
-                        $dirty = true;
                         $body[$name] = [];
+                        $dirty = true;
                     }
                 }
 

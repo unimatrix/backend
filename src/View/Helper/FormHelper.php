@@ -19,7 +19,7 @@ class FormHelper extends CakeFormHelper
      * Our widgets that require view ot be passed
      * @var array
      */
-    protected $_unimatrixViewWidgets = ['tag', 'moment', 'wysiwyg', 'picky', 'media', 'upload', 'stepper'];
+    protected $_unimatrixViewWidgets = ['tag', 'calendar', 'wysiwyg', 'picky', 'media', 'upload', 'stepper'];
 
     /**
      * {@inheritDoc}

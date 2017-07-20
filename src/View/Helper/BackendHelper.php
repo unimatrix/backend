@@ -31,7 +31,7 @@ class BackendHelper extends Helper {
         $this->getView()->loadHelper('Unimatrix/Cake.Debug');
         $this->getView()->loadHelper('Unimatrix/Backend.Form', ['widgets' => [
             'tag' => ['Unimatrix/Backend.Tag'],
-            'moment' => ['Unimatrix/Backend.Moment'],
+            'calendar' => ['Unimatrix/Backend.Calendar'],
             'wysiwyg' => ['Unimatrix/Backend.Wysiwyg'],
             'picky' => ['Unimatrix/Backend.Picky'],
             'media' => ['Unimatrix/Backend.Media'],
