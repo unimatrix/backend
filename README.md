@@ -4,11 +4,11 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/unimatrix/backend.svg?style=flat-square)](https://packagist.org/packages/unimatrix/backend/stats)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/unimatrix/backend/master/LICENSE)
 
-Backend for CakePHP 3.4
+Backend for CakePHP 3.5
 
 ## Requirements
 * PHP >= 7
-* CakePHP >= 3.4
+* CakePHP >= 3.5
 
 ## Installation
 
@@ -57,8 +57,12 @@ Of course you have to add some things in your `config/app.php`
                 'root' => WWW_ROOT . 'up',
                 'chmodFiles' => 0777,
                 'chmodFolders' => 0755,
-                'filesystemEncoding' => 'UTF-8',
+                'filesystemEncoding' => 'UTF-8'
             ]
+        ],
+        'whitelabel' => [
+            'product' => 'Unimatrix Venture Digital Platform System',
+            'website' => 'https://venture.unimatrix.ro'
         ]
     ],
  ```

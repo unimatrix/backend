@@ -11,7 +11,6 @@ var dump = function(what) { 'use strict';
 
 var Backend = function() { 'use strict';
     var store = {
-        version: '1.0'
 
     // flash message autoclose and binds
     }, _flash = function() {
@@ -63,12 +62,6 @@ var Backend = function() { 'use strict';
 
     // init
     }, __construct = function() {
-        // copyright
-        dump("+-------------------------------------------+");
-        dump('| Unimatrix Venture Digital Platform System | ');
-        dump('| version '+ store.version +' | http://venture.unimatrix.ro |');
-        dump("+-------------------------------------------+");
-        
     	// initiate foundation
     	$(document).foundation();
 
