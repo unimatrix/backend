@@ -47,7 +47,7 @@ class BackendHelper extends Helper {
      */
     public function beforeRender(Event $event, $viewFile) {
         // switch layout to backend
-        $this->getView()->layout('Unimatrix/Backend.backend');
+        $this->getView()->setLayout('Unimatrix/Backend.backend');
     }
 
     /**
