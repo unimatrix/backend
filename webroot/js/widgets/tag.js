@@ -79,6 +79,7 @@ Widgets.tag = function() { 'use strict';
                     }
                 });
 
+            _checkList(tag);
             _bind(tag);
         });
     };
