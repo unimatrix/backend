@@ -7,4 +7,6 @@ use Cake\Routing\Router;
 Router::prefix('backend', function(RouteBuilder $routes) {
     $routes->connect('/login', ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend']);
     $routes->connect('/logout', ['controller' => 'Login', 'action' => 'logout', 'plugin' => 'Unimatrix/Backend']);
+
+    $routes->fallbacks(DashedRoute::class);
 });
