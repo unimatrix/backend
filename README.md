@@ -77,7 +77,6 @@ Login is handled by the plugin but the rest of the controllers / modules can be 
 // backend
 Router::prefix('backend', function(RouteBuilder $routes) {
     $routes->connect('/', ['controller' => 'Dashboard', 'action' => 'index']);
-    $routes->fallbacks(DashedRoute::class);
 });
 ```
 
