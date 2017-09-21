@@ -10,8 +10,8 @@ use Unimatrix\Backend\Http\Middleware\EncryptedCookieMiddleware;
 // load Unimatrix Cake
 Plugin::load('Unimatrix/Cake', ['bootstrap' => true]);
 
-// not backend? don't continue
-if(Configure::read('Backend') && explode('/', env('REQUEST_URI'))[1] !== 'backend')
+// cli or not backend? don't continue
+if(PHP_SAPI === 'cli' || Configure::read('Backend') && explode('/', env('REQUEST_URI'))[1] !== 'backend')
     return;
 
 // attach middleware
