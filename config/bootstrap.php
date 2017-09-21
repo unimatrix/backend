@@ -3,9 +3,9 @@
 use Cake\Core\Plugin;
 use Cake\Core\Configure;
 use Cake\Event\EventManager;
-use Cake\Http\Middleware\CsrfProtectionMiddleware;
-use Cake\Http\Middleware\EncryptedCookieMiddleware;
 use Unimatrix\Backend\Routing\Middleware\WysiwygMiddleware;
+use Unimatrix\Backend\Http\Middleware\CsrfProtectionMiddleware;
+use Unimatrix\Backend\Http\Middleware\EncryptedCookieMiddleware;
 
 // load Unimatrix Cake
 Plugin::load('Unimatrix/Cake', ['bootstrap' => true]);
@@ -20,14 +20,10 @@ EventManager::instance()->on('Server.buildMiddleware', function ($event, $queue)
     $queue->insertBefore('Cake\Routing\Middleware\AssetMiddleware', WysiwygMiddleware::class);
 
     // EncryptedCookieMiddleware
-    if(Configure::check('Security.cookie'))
-        $queue->add(new EncryptedCookieMiddleware([Configure::read('Backend.credentials.cookie', 'backend_credentials_remember')], Configure::read('Security.cookie')));
+    if(Configure::check('Backend.security.salt') && strlen(Configure::read('Backend.security.salt')) === 64)
+        $queue->add(EncryptedCookieMiddleware::class);
 
     // CsrfProtectionMiddleware
     if(Configure::read('Backend.security.enabled'))
-        $queue->add(new CsrfProtectionMiddleware([
-            'httpOnly' => true,
-            'secure' => env('HTTPS'),
-            'cookieName' => 'backend_csrf_token',
-        ]));
+        $queue->add(CsrfProtectionMiddleware::class);
 });

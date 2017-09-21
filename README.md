@@ -39,12 +39,13 @@ Of course you have to add some things in your `config/app.php`
      */
     'Backend' => [
         'security' => [
+            'salt' => '....64characters....', // optional to encrypt backend cookies automatically
             'enabled' => true,
             'ssl' => false
         ],
         'credentials' => [
             'username' => 'user',
-            'password' => 'pass'
+            'password' => 'pass',
         ],
         'ckfinder' => [
             'license' => 'your-license',

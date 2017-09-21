@@ -33,6 +33,11 @@ class BackendComponent extends Component
         }
 
         // load required components
+        $this->getController()->loadComponent('Unimatrix/Cake.Cookie', [
+            'path' => '/backend',
+            'secure' => env('HTTPS'),
+            'httpOnly' => Configure::read('Backend.security.enabled') ?: false
+        ]);
         $this->getController()->loadComponent('Unimatrix/Backend.Flash');
         $this->getController()->loadComponent('Unimatrix/Backend.Auth');
     }

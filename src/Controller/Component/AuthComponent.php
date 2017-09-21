@@ -2,10 +2,7 @@
 
 namespace Unimatrix\Backend\Controller\Component;
 
-use DateTime;
 use Cake\Core\Configure;
-use Cake\Http\Cookie\Cookie;
-use Cake\Http\Cookie\CookieCollection;
 use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Component\AuthComponent as CakeAuthComponent;
 
@@ -14,10 +11,13 @@ use Cake\Controller\Component\AuthComponent as CakeAuthComponent;
  * Overwrite default Auth Component and add backend config and autologin
  *
  * @author Flavius
- * @version 1.2
+ * @version 1.3
  */
 class AuthComponent extends CakeAuthComponent
 {
+    // the controller
+    private $ctrl;
+
     /**
      * Our own config
      * @var array
@@ -51,22 +51,23 @@ class AuthComponent extends CakeAuthComponent
     public function initialize(array $config) {
         parent::initialize($config);
 
+        // set controller
+        $this->ctrl = $this->getController();
+
         // autologin based on cookie
-        $request = $this->getController()->request;
-        $cookies = (new CookieCollection())->createFromServerRequest($request);
-        if(is_null($this->user()) && $cookies->has($this->_config['cookieName'])) {
+        if(is_null($this->user()) && $this->ctrl->Cookie->check($this->_config['cookieName'])) {
             // perform login
             $result = $this->login();
             if($result) {
-                $this->getController()->Flash->set('You have successfully auto-logged in as ' . ucfirst($this->user('username')));
-                return $this->getController()->redirect($request->getRequestTarget());
+                $this->ctrl->Flash->set('You have successfully auto-logged in as ' . ucfirst($this->user('username')));
+                return $this->ctrl->redirect($this->ctrl->request->getRequestTarget());
 
             // bad cookie
-            } else $this->getController()->response = $this->getController()->response->withExpiredCookie(new Cookie($this->_config['cookieName']));
+            } else $this->ctrl->Cookie->delete($this->_config['cookieName']);
         }
 
         // set auth to template
-        $this->getController()->set('auth', $this->user());
+        $this->ctrl->set('auth', $this->user());
 
         // allow public logout
         $this->allow('logout');
@@ -84,20 +85,12 @@ class AuthComponent extends CakeAuthComponent
             $this->setUser($user);
 
             // write cookie if remember me was checked
-            if((bool)$this->getController()->request->getData('remember', 0)) {
-                // build cookie
-                $this->getController()->response = $this->getController()->response->withCookie(
-                    (new Cookie($this->_config['cookieName']))
-                        ->withValue($user)
-                        ->withExpiry(new DateTime('+1 month'))
-                        ->withSecure(env('HTTPS'))
-                        ->withHttpOnly(Configure::read('Backend.security.enabled') ?: false)
-                );
-            }
+            if((bool)$this->ctrl->request->getData('remember', 0))
+                $this->ctrl->Cookie->write($this->_config['cookieName'], $user, ['expire' => '+1 month']);
 
             // redirect to backend (or wherever he was) after login
             $redirect = $this->redirectUrl();
-            return $redirect == '/' ? '/' . $this->getController()->request->getParam('prefix') : $redirect;
+            return $redirect == '/' ? '/' . $this->ctrl->request->getParam('prefix') : $redirect;
 
         // user could not be identified
         } else return false;
@@ -109,7 +102,7 @@ class AuthComponent extends CakeAuthComponent
      */
     public function logout(){
         // delete cookie
-        $this->getController()->response = $this->getController()->response->withExpiredCookie(new Cookie($this->_config['cookieName']));
+        $this->ctrl->Cookie->delete($this->_config['cookieName']);
 
         // continue as normal
         return parent::logout();
