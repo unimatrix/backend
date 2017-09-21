@@ -46,6 +46,7 @@ Of course you have to add some things in your `config/app.php`
         'credentials' => [
             'username' => 'user',
             'password' => 'pass',
+            'cookie' => 'backend_credentials_remember' // optional cookie autologin name
         ],
         'ckfinder' => [
             'license' => 'your-license',
