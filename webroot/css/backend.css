@@ -40,8 +40,8 @@ span.highlight {
     background: #ba62ff;
 }
 
-    .top-bar ul > li:hover {
-        background: #9631e3;
+    .top-bar ul > li {
+        transition: background-color .25s ease-out,color .25s ease-out;
     }
 
     .top-bar ul > li > a {
@@ -51,6 +51,12 @@ span.highlight {
         color: #fff;
     }
 
+    .top-bar-left ul > li:hover,
+    .top-bar-right ul > li:hover {
+        background: #a64ee7;
+    }
+
+    .top-bar-left ul > li > a,
     .top-bar-right ul > li > a {
         font-size: 0.85rem;
         line-height: 1.8;
@@ -68,6 +74,7 @@ span.highlight {
 .top-bar-title {
     padding: 0px;
     background: #9631e3;
+    margin-right: 0px;
 }
 
     .top-bar-title > ul.menu {
