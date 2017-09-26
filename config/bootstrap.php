@@ -6,9 +6,10 @@ use Cake\Event\EventManager;
 use Unimatrix\Backend\Routing\Middleware\WysiwygMiddleware;
 use Unimatrix\Backend\Http\Middleware\CsrfProtectionMiddleware;
 use Unimatrix\Backend\Http\Middleware\EncryptedCookieMiddleware;
+use Unimatrix\Cake\Error\Middleware\EmailErrorHandlerMiddleware;
 
 // load Unimatrix Cake
-Plugin::load('Unimatrix/Cake', ['bootstrap' => true]);
+Plugin::load('Unimatrix/Cake');
 
 // cli or not backend? don't continue
 if(PHP_SAPI === 'cli' || Configure::read('Backend') && explode('/', env('REQUEST_URI'))[1] !== 'backend')
@@ -16,6 +17,9 @@ if(PHP_SAPI === 'cli' || Configure::read('Backend') && explode('/', env('REQUEST
 
 // attach middleware
 EventManager::instance()->on('Server.buildMiddleware', function ($event, $queue) {
+    // EmailErrorHandlerMiddleware
+    $queue->insertAt(0, EmailErrorHandlerMiddleware::class);
+
     // WysiwygMiddleware
     $queue->insertBefore('Cake\Routing\Middleware\AssetMiddleware', WysiwygMiddleware::class);
 
