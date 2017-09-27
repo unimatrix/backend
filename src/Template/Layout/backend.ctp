@@ -60,10 +60,10 @@ $project = [
             <div class="clearfix">
                 <div class="top-bar-right">
                     <ul class="menu">
-                        <?php if(is_null($auth)) { ?>
-                            <li><?= $this->Html->link('<i class="fa fa-sign-in" aria-hidden="true"></i>Please login to continue', ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
+                        <?php if($auth) { ?>
+                        	<li><?= $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i>Logout', ['controller' => 'Login', 'action' => 'logout', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
                         <?php } else { ?>
-                            <li><?= $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i>Logout', ['controller' => 'Login', 'action' => 'logout', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
+                            <li><?= $this->Html->link('<i class="fa fa-sign-in" aria-hidden="true"></i>Please login to continue', ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
                         <?php } ?>
                     </ul>
                 </div>
