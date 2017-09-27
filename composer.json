@@ -8,7 +8,7 @@
         "php": ">=7.0.0",
         "cakephp/cakephp": "~3.5",
         "unimatrix/cake": "~1.1",
-        "unimatrix/ckfinder": "~1.0"
+        "unimatrix/ckfinder": "~1.1"
     },
     "autoload": {
         "psr-4": {
