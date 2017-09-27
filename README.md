@@ -17,7 +17,7 @@ You can install this plugin into your CakePHP application using [composer](http:
 The recommended way to install composer packages is:
 
 ```
-composer require unimatrix/backend:~1.0
+composer require unimatrix/backend:~1.1
 ```
 
 Don't forget to add it to bootstrap
