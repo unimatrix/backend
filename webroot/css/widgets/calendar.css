@@ -12,9 +12,9 @@ div.calendar-widget {
         max-width: 450px;
     }
 
-    div.calendar-widget input[readonly] {
+    div.calendar-widget input[readonly]:not([disabled]) {
         background: initial;
-        cursor: initial;
+        cursor: text;
     }
 
 /** Pignose overwrites **/
