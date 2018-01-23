@@ -28,6 +28,10 @@ class AuthComponent extends CakeAuthComponent
             'controller' => 'Login',
             'action' => 'index',
             'plugin' => 'Unimatrix/Backend'
+        ],
+        'storage' => [
+            'className' => 'Session',
+            'key' => 'Auth.Backend'
         ]
     ];
 
