@@ -54,16 +54,16 @@ $project = [
         <nav class="top-bar">
             <div class="top-bar-title large-3 medium-4 columns">
                 <ul class="menu">
-                    <li><?= $this->Html->link('<i class="fa fa-home" aria-hidden="true"></i>' . __('Administration'), is_null($auth) ? ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend'] : ['controller' => 'Dashboard', 'action' => 'index'], ['escape' => false]) ?></li>
+                    <li><?= $this->Html->link('<i class="fa fa-home" aria-hidden="true"></i>' . __d('Unimatrix/Backend', 'Administration'), is_null($auth) ? ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend'] : ['controller' => 'Dashboard', 'action' => 'index'], ['escape' => false]) ?></li>
                 </ul>
             </div>
             <div class="clearfix">
                 <div class="top-bar-right">
                     <ul class="menu">
                         <?php if($auth) { ?>
-                        	<li><?= $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i>' . __('Logout'), ['controller' => 'Login', 'action' => 'logout', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
+                        	<li><?= $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i>' . __d('Unimatrix/Backend', 'Logout'), ['controller' => 'Login', 'action' => 'logout', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
                         <?php } else { ?>
-                            <li><?= $this->Html->link('<i class="fa fa-sign-in" aria-hidden="true"></i>' . __('Please login to continue'), ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
+                            <li><?= $this->Html->link('<i class="fa fa-sign-in" aria-hidden="true"></i>' . __d('Unimatrix/Backend', 'Please login to continue'), ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
                         <?php } ?>
                     </ul>
                 </div>

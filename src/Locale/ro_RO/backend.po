@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2018-02-12 21:16+0200\n"
+"POT-Creation-Date: 2018-02-12 23:16+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -16,41 +16,53 @@ msgstr ""
 
 #: /Template/Backend/Login/index.ctp:3
 msgid "Actions"
-msgstr ""
+msgstr "Acțiuni"
 
 #: /Template/Backend/Login/index.ctp:4
 msgid "Back to site"
-msgstr ""
+msgstr "Înapoi la site"
 
 #: /Template/Backend/Login/index.ctp:10
 msgid "Authentication"
-msgstr ""
+msgstr "Autentificare"
+
+#: /Template/Backend/Login/index.ctp:11
+msgid "Username"
+msgstr "Utilizator"
+
+#: /Template/Backend/Login/index.ctp:12
+msgid "Password"
+msgstr "Parolă"
+
+#: /Template/Backend/Login/index.ctp:13
+msgid "Remember me"
+msgstr "Ține-mă minte"
 
 #: /Template/Backend/Login/index.ctp:15
 msgid "Login"
-msgstr ""
+msgstr "Autentifică-te"
 
 #: /Template/Element/pagination.ctp:3
 msgid "prev"
-msgstr ""
+msgstr "înapoi"
 
 #: /Template/Element/pagination.ctp:5
 msgid "next"
-msgstr ""
+msgstr "înainte"
 
 #: /Template/Element/search.ctp:2
 msgid "Search here..."
-msgstr ""
+msgstr "Caută aici..."
 
 #: /Template/Layout/backend.ctp:57
 msgid "Administration"
-msgstr ""
+msgstr "Administrare"
 
 #: /Template/Layout/backend.ctp:64
 msgid "Logout"
-msgstr ""
+msgstr "Deconectează-te"
 
 #: /Template/Layout/backend.ctp:66
 msgid "Please login to continue"
-msgstr ""
+msgstr "Pentru a continua te rugăm să te autentifici"
 
