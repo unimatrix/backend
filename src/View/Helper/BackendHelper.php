@@ -13,11 +13,28 @@ use Unimatrix\Cake\Lib\Lexicon;
  * it also handles some custom backend logic and template correction
  *
  * @author Flavius
- * @version 1.1
+ * @version 1.2
  */
 class BackendHelper extends Helper {
     // load other helpers
     public $helpers = ['Text'];
+
+    // default config
+    protected $_defaultConfig = [
+        'Minify' => [
+            'css' => ['path' => '/cache-css'], // without trailing slash
+            'js' => ['path' => '/cache-js'] // without trailing slash
+        ],
+        'Form' => ['widgets' => [
+            'tag' => ['Unimatrix/Backend.Tag'],
+            'calendar' => ['Unimatrix/Backend.Calendar'],
+            'wysiwyg' => ['Unimatrix/Backend.Wysiwyg'],
+            'picky' => ['Unimatrix/Backend.Picky'],
+            'media' => ['Unimatrix/Backend.Media'],
+            'upload' => ['Unimatrix/Backend.Upload'],
+            'stepper' => ['Unimatrix/Backend.Stepper']
+        ]]
+    ];
 
     /**
      * {@inheritDoc}
@@ -26,18 +43,13 @@ class BackendHelper extends Helper {
     public function initialize(array $config) {
         parent::initialize($config);
 
+        // we need this
+        $view = $this->getView();
+
         // load required helpers
-        $this->getView()->loadHelper('Unimatrix/Cake.Minify');
-        $this->getView()->loadHelper('Unimatrix/Cake.Debug');
-        $this->getView()->loadHelper('Unimatrix/Backend.Form', ['widgets' => [
-            'tag' => ['Unimatrix/Backend.Tag'],
-            'calendar' => ['Unimatrix/Backend.Calendar'],
-            'wysiwyg' => ['Unimatrix/Backend.Wysiwyg'],
-            'picky' => ['Unimatrix/Backend.Picky'],
-            'media' => ['Unimatrix/Backend.Media'],
-            'upload' => ['Unimatrix/Backend.Upload'],
-            'stepper' => ['Unimatrix/Backend.Stepper']
-        ]]);
+        $view->loadHelper('Unimatrix/Cake.Debug');
+        $view->loadHelper('Unimatrix/Cake.Minify', $this->_config['Minify']);
+        $view->loadHelper('Unimatrix/Cake.Form', $this->_config['Form']);
     }
 
     /**

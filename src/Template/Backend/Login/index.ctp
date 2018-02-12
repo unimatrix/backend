@@ -7,7 +7,7 @@
 <div class="dashboard login form large-9 medium-8 columns content">
     <?= $this->Form->create() ?>
     <fieldset>
-        <legend><?= __('Login') ?></legend>
+        <legend><?= __('Authentication') ?></legend>
         <?= $this->Form->control('username'); ?>
 		<?= $this->Form->control('password'); ?>
 		<?= $this->Form->control('remember', ['type' => 'checkbox', 'label' => 'Remember me', 'checked' => true]); ?>
