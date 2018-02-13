@@ -23,9 +23,9 @@ class LoginController extends AppController
         if($this->request->is('post')) {
             $result = $this->Auth->login();
             if($result) {
-                $this->Flash->success('You have successfully logged in as ' . ucfirst($this->Auth->user('username')));
+                $this->Flash->success(__d('Unimatrix/backend', 'You have successfully logged in as {0}.', ucfirst($this->Auth->user('username'))));
                 return $this->redirect($result);
-            } else $this->Flash->error($this->Auth->config('authError'));
+            } else $this->Flash->error(__d('Unimatrix/backend', 'The username or password you entered is incorrect.'));
         }
     }
 

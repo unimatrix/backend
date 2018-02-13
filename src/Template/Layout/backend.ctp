@@ -28,7 +28,7 @@ $project = [
     echo $this->Html->charset();
 
     // title
-    $title = str_replace('Backend', 'Admin', $this->fetch('title'));
+    $title = str_replace('Backend', __d('Unimatrix/backend', 'Admin'), $this->fetch('title'));
     echo "<title>{$title}</title>";
 
     // icon and meta
@@ -40,8 +40,8 @@ $project = [
     echo $this->Html->meta('theme-color', '#000000');
 
     // SEO
-    echo $this->Html->meta('keywords', 'Admin, Administration, Backend, Control, Panel');
-    echo $this->Html->meta('description', 'Administration - Backend Control Panel');
+    echo $this->Html->meta('keywords', __d('Unimatrix/backend', 'Admin, Administration, Backend, Control, Panel'));
+    echo $this->Html->meta('description', __d('Unimatrix/backend', 'Administration - Backend Control Panel'));
     echo $this->Html->meta(['rel' => 'canonical', 'link' => $this->Url->build(null, true)]);
 
     // css
@@ -54,16 +54,16 @@ $project = [
         <nav class="top-bar">
             <div class="top-bar-title large-3 medium-4 columns">
                 <ul class="menu">
-                    <li><?= $this->Html->link('<i class="fa fa-home" aria-hidden="true"></i>' . __d('Unimatrix/Backend', 'Administration'), is_null($auth) ? ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend'] : ['controller' => 'Dashboard', 'action' => 'index'], ['escape' => false]) ?></li>
+                    <li><?= $this->Html->link('<i class="fa fa-home" aria-hidden="true"></i>' . __d('Unimatrix/backend', 'Administration'), is_null($auth) ? ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend'] : ['controller' => 'Dashboard', 'action' => 'index'], ['escape' => false]) ?></li>
                 </ul>
             </div>
             <div class="clearfix">
                 <div class="top-bar-right">
                     <ul class="menu">
                         <?php if($auth) { ?>
-                        	<li><?= $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i>' . __d('Unimatrix/Backend', 'Logout'), ['controller' => 'Login', 'action' => 'logout', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
+                        	<li><?= $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i>' . __d('Unimatrix/backend', 'Logout'), ['controller' => 'Login', 'action' => 'logout', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
                         <?php } else { ?>
-                            <li><?= $this->Html->link('<i class="fa fa-sign-in" aria-hidden="true"></i>' . __d('Unimatrix/Backend', 'Please login to continue'), ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
+                            <li><?= $this->Html->link('<i class="fa fa-sign-in" aria-hidden="true"></i>' . __d('Unimatrix/backend', 'Please login to continue'), ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
                         <?php } ?>
                     </ul>
                 </div>

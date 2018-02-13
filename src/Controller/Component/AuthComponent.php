@@ -43,6 +43,7 @@ class AuthComponent extends CakeAuthComponent
         // add our own config
         $config += $this->_unimatrixConfig;
         $config['cookieName'] = Configure::read('Backend.credentials.cookie', 'backend_credentials_remember');
+        $config['authError'] = __d('Unimatrix/backend', 'You are not authorized to access that location.');
 
         // continue as normal
         parent::__construct($registry, $config);
@@ -63,7 +64,7 @@ class AuthComponent extends CakeAuthComponent
             // perform login
             $result = $this->login();
             if($result) {
-                $this->ctrl->Flash->set('You have successfully auto-logged in as ' . ucfirst($this->user('username')));
+                $this->ctrl->Flash->set(__d('Unimatrix/backend', 'You have successfully auto-logged in as {0}.', ucfirst($this->user('username'))));
                 return $this->ctrl->redirect($this->ctrl->request->getRequestTarget());
 
             // bad cookie

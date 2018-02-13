@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2018-02-12 23:16+0200\n"
+"POT-Creation-Date: 2018-02-13 11:27+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -13,6 +13,22 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /Controller/Backend/LoginController.php:26
+msgid "You have successfully logged in as {0}."
+msgstr "Autentificare reușită ca și {0}."
+
+#: /Controller/Backend/LoginController.php:28
+msgid "The username or password you entered is incorrect."
+msgstr "Numele de utilizator sau parola sunt greșite."
+
+#: /Controller/Component/AuthComponent.php:46
+msgid "You are not authorized to access that location."
+msgstr "Nu sunteți autorizat să accesați această pagină."
+
+#: /Controller/Component/AuthComponent.php:67
+msgid "You have successfully auto-logged in as {0}."
+msgstr "Autentificare automată reușită ca și {0}."
 
 #: /Template/Backend/Login/index.ctp:3
 msgid "Actions"
@@ -53,6 +69,18 @@ msgstr "înainte"
 #: /Template/Element/search.ctp:2
 msgid "Search here..."
 msgstr "Caută aici..."
+
+#: /Template/Layout/backend.ctp:31
+msgid "Admin"
+msgstr "Admin"
+
+#: /Template/Layout/backend.ctp:43
+msgid "Admin, Administration, Backend, Control, Panel"
+msgstr "Admin, Administrare, Backend, Control, Panou"
+
+#: /Template/Layout/backend.ctp:44
+msgid "Administration - Backend Control Panel"
+msgstr "Administrare - Panou de control"
 
 #: /Template/Layout/backend.ctp:57
 msgid "Administration"
