@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2018-02-13 11:27+0200\n"
+"POT-Creation-Date: 2018-02-13 12:52+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -92,5 +92,9 @@ msgstr ""
 
 #: /Template/Layout/backend.ctp:66
 msgid "Please login to continue"
+msgstr ""
+
+#: /Template/Layout/backend.ctp:75
+msgid "Generated in"
 msgstr ""
 
