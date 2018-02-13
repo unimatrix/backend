@@ -22,8 +22,15 @@ class BackendHelper extends Helper {
     // default config
     protected $_defaultConfig = [
         'Minify' => [
-            'css' => ['path' => '/cache-css'], // without trailing slash
-            'js' => ['path' => '/cache-js'] // without trailing slash
+            'compress' => [
+                'html' => true,
+                'css' => true,
+                'js' => true
+            ],
+            'paths' => [
+                'css' => '/cache-css',
+                'js' => '/cache-js'
+            ]
         ],
         'Form' => ['widgets' => [
             'tag' => ['Unimatrix/Backend.Tag'],
