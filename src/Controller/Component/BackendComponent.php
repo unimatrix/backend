@@ -14,7 +14,7 @@ use Unimatrix\Backend\Form\Backend\SearchForm;
  * it also handles some custom backend logic and request filtering
  *
  * @author Flavius
- * @version 1.1
+ * @version 1.2
  */
 class BackendComponent extends Component
 {
@@ -163,24 +163,53 @@ class BackendComponent extends Component
         // start empty
         $conditions = [];
 
-        // search by id
+        // search by id (..#15..)
         if($term[0] == '#') {
-            $conditions["{$this->alias}.id"] = $this->highlight['id'] = ltrim($term, '#');
+            $field = 'id';
+            $value = ltrim($term, '#');
+            $this->buildHighlight($field, $value);
+            $conditions = function($exp, $q) use($field, $value) {
+                return $exp->eq("{$this->alias}.{$field}", $value);
+            };
 
-        // search by field
-        } else if(strpos($term, ':') !== false) {
+        // search by field (..date_format(field1, '%x%v')=:201807 && field2!=:TestNot && Alias.field3:TestIsWithAlias..)
+        } else if($position = strpos($term, ':') !== false) {
             list($field, $value) = explode(':', $term);
-            $conditions[strpos($field, '.') !== false ? $field :
-                (strpos($field, '(') !== false ? preg_replace('/(\((?!.*\())/', "({$this->alias}.", $field) :
-                    "{$this->alias}.{$field}")] = $value;
-            $this->highlight[strpos($field, '(') !== false ? $this->alias(substr(strrchr(rtrim($field, ')'), '('), 1)) :
-                $this->alias($field)][] = $value;
 
-        // search by text
+            // find operator
+            switch(true) {
+                // not equals
+                case $this->matchingEnds($field, '!='):
+                    $field = rtrim($field, '!=');
+                    $aliased = $this->buildAlias($field);
+                    $expression = function($exp, $q) use($aliased, $value) {
+                        return $exp->notEq($aliased, $value);
+                    };
+                break;
+
+                // equals
+                case $this->matchingEnds($field, '='):
+                    $field = rtrim($field, '=');
+                default:
+                    $aliased = $this->buildAlias($field);
+                    $expression = function($exp, $q) use($aliased, $value) {
+                        return $exp->eq($aliased, $value);
+                    };
+                break;
+            }
+
+            // build hightlight and condition
+            $this->buildHighlight($field, $value);
+            $conditions = $expression;
+
+        // search by text (..Test..)
         } else {
             foreach($this->fields as $field) {
-                $conditions["{$this->alias}.{$field} LIKE"] = "%{$term}%";
-                $this->highlight[$field][] = $term;
+                $value = $term;
+                $this->buildHighlight($field, $value);
+                $conditions[] = function($exp, $q) use($field, $value) {
+                    return $exp->like("{$this->alias}.{$field}", "%{$value}%");
+                };
             }
         }
 
@@ -189,11 +218,53 @@ class BackendComponent extends Component
     }
 
     /**
-     * Strip alias from the field
+     * String ends with string?
+     * @param string $s1
+     * @param string $s2
+     * @return boolean
+     */
+    private function matchingEnds($s1, $s2) {
+        return substr($s1, -strlen($s2)) === $s2;
+    }
+
+    /**
+     * Build field alias
      * @param string $field
      * @return string
      */
-    private function alias($field) {
-        return strpos($field, '.') !== false ? substr(strrchr($field, '.'), 1) : $field;
+    private function buildAlias($field) {
+        // field already aliased?
+        if(strpos($field, '.') !== false)
+            return $field;
+
+        // field is inside a function
+        if(strpos($field, '(') !== false)
+            return preg_replace('/(\((?!.*\())/', "({$this->alias}.", $field);
+
+        // build alias
+        return "{$this->alias}.{$field}";
+    }
+
+    /**
+     * Build hightlight array
+     * @param string $field
+     * @param string $value
+     */
+    private function buildHighlight($field, $value) {
+        // default, hightlight is field
+        $highlight = $field;
+
+        // field is inside a function
+        if(strpos($field, '(') !== false) {
+            $highlight = substr(strrchr(rtrim($field, ')'), '('), 1);
+            if(strpos($highlight, ',') !== false) // got multiple arguments? get the 1st one
+                $highlight = substr($highlight, 0 , (strpos($highlight, ',')));
+        }
+
+        // strip alias
+        $highlight = strpos($highlight, '.') !== false ? substr(strrchr($highlight, '.'), 1) : $highlight;
+
+        // build hightlight
+        $this->highlight[$highlight][] = $value;
     }
 }

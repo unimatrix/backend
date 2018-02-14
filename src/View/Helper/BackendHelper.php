@@ -13,7 +13,7 @@ use Unimatrix\Cake\Lib\Lexicon;
  * it also handles some custom backend logic and template correction
  *
  * @author Flavius
- * @version 1.2
+ * @version 1.3
  */
 class BackendHelper extends Helper {
     // load other helpers
@@ -70,7 +70,10 @@ class BackendHelper extends Helper {
     }
 
     /**
-     * In case of search, highlight the text
+     * Outputs value of an entity with some caveats
+     * - field isnt currently search and must be truncated? do that
+     * - don't perform truncating in case field is search to display the hightlight
+     *
      * @param Cake\ORM\Entity $entity
      * @param string $field
      * @param bool | integer $truncate
@@ -82,16 +85,29 @@ class BackendHelper extends Helper {
         if($entity->has($field))
             $value = $entity->get($field);
 
-        // no highlight for this field? return truncated text (if truncated)
-        $highlight = $this->getView()->get('highlight') ? $this->getView()->get('highlight') : [];
-        if(!isset($highlight[$field])) {
-            if($truncate)
-                $value = $this->Text->truncate($value, $truncate, ['html' => true]);
+        // field isn't searched and must be truncated?
+        $highlight = $this->getView()->get('highlight', []);
+        if(!isset($highlight[$field]) && $truncate)
+            return $this->Text->truncate($value, $truncate, ['html' => true]);
 
-        // otherwise return highlighted without truncating the text
-        } else $value = Lexicon::highlight($value, $highlight[$field]);
+        // return highlighted
+        return $this->highlight($value, $field);
+    }
 
-        // return teh value
-        return $value;
+    /**
+     * Highlights the text
+     * - can also be used standalone to highlight composed values
+     * from different fields (assuming their fields were searched)
+     *
+     * @param string $value
+     * @param string $field
+     * @return string
+     */
+    public function highlight($value, $field) {
+        $highlight = $this->getView()->get('highlight', []);
+        if(!isset($highlight[$field]))
+            return $value;
+
+        return Lexicon::highlight($value, $highlight[$field]);
     }
 }
