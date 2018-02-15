@@ -27,6 +27,13 @@ class BackendHelper extends Helper {
                 'css' => true,
                 'js' => true
             ],
+            'config' => [
+                'html' => [
+                    'doRemoveOmittedHtmlTags' => false
+                ],
+                'css' => [],
+                'js' => []
+            ],
             'paths' => [
                 'css' => '/cache-css',
                 'js' => '/cache-js'
