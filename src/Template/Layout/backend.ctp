@@ -76,6 +76,12 @@ $project = [
         <div class="large-9 medium-8 columns text-center">&copy; 2016-<?= date('Y') ?>&nbsp;<?php echo $this->Html->link(Configure::read('Backend.whitelabel.product'), Configure::read('Backend.whitelabel.website')) ?></div>
     </footer>
     <?php
+        // inline stuff
+        $this->Minify->inline('script', "
+            var WEBROOT = \"{$this->Url->build('/', true)}\";
+            var DEV_ENV = ". (Configure::read('debug') ? 'true' : 'false') .";
+        ");
+
         // js
         $this->Minify->script($project['js']);
         $this->Minify->fetch('script');

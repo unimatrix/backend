@@ -13,7 +13,7 @@ Widgets.media = function() { 'use strict';
             height: 540
         },
         empty: {
-            picture: '/unimatrix/backend/img/widgets/media-plus.png',
+            picture: WEBROOT + 'unimatrix/backend/img/widgets/media-plus.png',
             input: '_to_empty_array_'
         }
 
