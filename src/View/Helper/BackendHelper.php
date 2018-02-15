@@ -76,10 +76,20 @@ class BackendHelper extends Helper {
      *
      * @param Cake\ORM\Entity $entity
      * @param string $field
-     * @param bool | integer $truncate
+     * @param array $options An array of options.
+     *
      * @return string
      */
-    public function search(Entity $entity, $field, $truncate = false) {
+    public function search(Entity $entity, $field, array $options = []) {
+        // options
+        $defaults = [
+            'truncate' => false,
+            'html' => false
+        ];
+
+        // overwrite defaults with options values
+        $options += $defaults;
+
         // handle value
         $value = null;
         if($entity->has($field))
@@ -87,11 +97,11 @@ class BackendHelper extends Helper {
 
         // field isn't searched and must be truncated?
         $highlight = $this->getView()->get('highlight', []);
-        if(!isset($highlight[$field]) && $truncate)
-            return $this->Text->truncate($value, $truncate, ['html' => true]);
+        if(!isset($highlight[$field]) && $options['truncate'])
+            return $this->Text->truncate($value, $options['truncate'], ['html' => true]);
 
         // return highlighted
-        return $this->highlight($value, $field);
+        return $this->highlight($value, $field, $options['html']);
     }
 
     /**
@@ -103,11 +113,11 @@ class BackendHelper extends Helper {
      * @param string $field
      * @return string
      */
-    public function highlight($value, $field) {
+    public function highlight($value, $field, $html = false) {
         $highlight = $this->getView()->get('highlight', []);
         if(!isset($highlight[$field]))
             return $value;
 
-        return Lexicon::highlight($value, $highlight[$field]);
+        return Lexicon::highlight($value, $highlight[$field], $html);
     }
 }
