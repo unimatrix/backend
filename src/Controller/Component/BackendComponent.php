@@ -25,21 +25,25 @@ class BackendComponent extends Component
     public function initialize(array $config) {
         parent::initialize($config);
 
+        // we need these
+        $controller = $this->getController();
+        $request = $controller->request;
+
         // load security
         if(Configure::read('Backend.security.enabled')) {
-            $this->getController()->loadComponent('Security');
+            $controller->loadComponent('Security');
             if(Configure::read('Backend.security.ssl'))
-                $this->getController()->Security->requireSecure();
+                $controller->Security->requireSecure();
         }
 
         // load required components
-        $this->getController()->loadComponent('Unimatrix/Cake.Cookie', [
-            'path' => '/backend',
+        $controller->loadComponent('Unimatrix/Cake.Cookie', [
+            'path' => $request->getAttribute('webroot') . $request->getParam('prefix'),
             'secure' => env('HTTPS'),
             'httpOnly' => Configure::read('Backend.security.enabled') ?: false
         ]);
-        $this->getController()->loadComponent('Unimatrix/Backend.Flash');
-        $this->getController()->loadComponent('Unimatrix/Backend.Auth');
+        $controller->loadComponent('Unimatrix/Backend.Flash');
+        $controller->loadComponent('Unimatrix/Backend.Auth');
     }
 
     /**

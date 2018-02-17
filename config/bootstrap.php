@@ -3,6 +3,7 @@
 use Cake\Core\Plugin;
 use Cake\Core\Configure;
 use Cake\Event\EventManager;
+use Cake\Http\ServerRequestFactory;
 use Unimatrix\Backend\Routing\Middleware\WysiwygMiddleware;
 use Unimatrix\Backend\Http\Middleware\CsrfProtectionMiddleware;
 use Unimatrix\Backend\Http\Middleware\EncryptedCookieMiddleware;
@@ -12,12 +13,12 @@ use Unimatrix\Cake\Error\Middleware\EmailErrorHandlerMiddleware;
 Plugin::load('Unimatrix/Cake');
 
 // get url path
-$url = explode('/', env('REQUEST_URI'));
+$url = explode('/', ServerRequestFactory::fromGlobals()->url);
 
 // is cli or not backend? don't continue
 if(PHP_SAPI === 'cli'
-    || (Configure::read('Backend') && !($url[1] === 'backend'
-        || ($url[1] === 'unimatrix' && $url[2] === 'backend'))))
+    || (Configure::read('Backend') && !($url[0] === 'backend'
+        || ($url[0] === 'unimatrix' && $url[1] === 'backend'))))
             return;
 
 // attach middleware
