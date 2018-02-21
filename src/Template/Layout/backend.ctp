@@ -61,7 +61,7 @@ $project = [
                 <div class="top-bar-right">
                     <ul class="menu">
                         <?php if($auth) { ?>
-                        	<li><?= $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i>' . __d('Unimatrix/backend', 'Logout'), ['controller' => 'Login', 'action' => 'logout', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
+                            <li><?= $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i>' . __d('Unimatrix/backend', 'Logout'), ['controller' => 'Login', 'action' => 'logout', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
                         <?php } else { ?>
                             <li><?= $this->Html->link('<i class="fa fa-sign-in" aria-hidden="true"></i>' . __d('Unimatrix/backend', 'Please login to continue'), ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend'], ['escape' => false]) ?></li>
                         <?php } ?>

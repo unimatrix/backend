@@ -38,8 +38,8 @@ Widgets.wysiwyg = function() { 'use strict';
                 ['Maximize']
             ], stylesSet: [
                 { name: 'Blockquote', element: 'p', attributes: {'class': 'blockquote'} },
-	        ]
-		};
+            ]
+        };
 
     // init
     }, __construct = function() {

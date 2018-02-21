@@ -28,47 +28,47 @@ var Backend = function() { 'use strict';
                 window.setTimeout(function() { collapse.call(self); }, 3000);
         });
 
-	// mobile side nav expansion
+    // mobile side nav expansion
     }, _sidenav = function() {
-    	var b = $('div.arrow-expand > i');
+        var b = $('div.arrow-expand > i');
 
-    	// on event click
-    	b.on('click', function() {
-    		var self = $(this);
-    		self.closest('#actions-sidebar').toggleClass('open');
-    	});
+        // on event click
+        b.on('click', function() {
+            var self = $(this);
+            self.closest('#actions-sidebar').toggleClass('open');
+        });
 
-	// check form errors and blink the corresponding tab
+    // check form errors and blink the corresponding tab
     }, _checkerrors = function() {
-    	// check first error
-    	var e = $('form div.input.error');
-    	if(!e.length > 0)
-    		return false;
+        // check first error
+        var e = $('form div.input.error');
+        if(!e.length > 0)
+            return false;
 
-    	// go through each error field
-    	e.each(function() {
-    		var self = $(this);
+        // go through each error field
+        e.each(function() {
+            var self = $(this);
 
-    		// got tabpanel?
-    		var panel = self.closest('div.tabs-panel');
-    		if(!panel.length > 0)
-    			return false;
+            // got tabpanel?
+            var panel = self.closest('div.tabs-panel');
+            if(!panel.length > 0)
+                return false;
 
-    		// error the tab for a visual notification
-    		var tab = $('form ul.tabs a#' + panel.attr('aria-labelledby')).parent();
-    		if(!tab.hasClass('error'))
-    			tab.addClass('error');
-    	});
+            // error the tab for a visual notification
+            var tab = $('form ul.tabs a#' + panel.attr('aria-labelledby')).parent();
+            if(!tab.hasClass('error'))
+                tab.addClass('error');
+        });
 
     // init
     }, __construct = function() {
-    	// initiate foundation
-    	$(document).foundation();
+        // initiate foundation
+        $(document).foundation();
 
-		// handle things
-    	_flash();
-		_sidenav();
-		_checkerrors();
+        // handle things
+        _flash();
+        _sidenav();
+        _checkerrors();
     };
 
     // public, yay

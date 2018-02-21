@@ -9,8 +9,8 @@
     <fieldset>
         <legend><?= __d('Unimatrix/backend', 'Authentication') ?></legend>
         <?= $this->Form->control('username', ['label' => __d('Unimatrix/backend', 'Username')]); ?>
-		<?= $this->Form->control('password', ['label' => __d('Unimatrix/backend', 'Password')]); ?>
-		<?= $this->Form->control('remember', ['type' => 'checkbox', 'label' => __d('Unimatrix/backend', 'Remember me'), 'checked' => true]); ?>
+        <?= $this->Form->control('password', ['label' => __d('Unimatrix/backend', 'Password')]); ?>
+        <?= $this->Form->control('remember', ['type' => 'checkbox', 'label' => __d('Unimatrix/backend', 'Remember me'), 'checked' => true]); ?>
     </fieldset>
     <?= $this->Form->button(__d('Unimatrix/backend', 'Login')) ?>
     <?= $this->Form->end() ?>
