@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2018-02-13 12:52+0200\n"
+"POT-Creation-Date: 2018-02-21 15:43+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -29,6 +29,10 @@ msgstr "Nu sunteți autorizat să accesați această pagină."
 #: /Controller/Component/AuthComponent.php:67
 msgid "You have successfully auto-logged in as {0}."
 msgstr "Autentificare automată reușită ca și {0}."
+
+#: /Form/Backend/SearchForm.php:33
+msgid "Search query is too short"
+msgstr "Textul de căutare este prea scurt"
 
 #: /Template/Backend/Login/index.ctp:3
 msgid "Actions"
@@ -97,4 +101,12 @@ msgstr "Pentru a continua te rugăm să te autentifici"
 #: /Template/Layout/backend.ctp:75
 msgid "Generated in"
 msgstr "Generat în"
+
+#: /View/Widget/MediaWidget.php:75
+msgid "Full Image"
+msgstr "Toată Imaginea"
+
+#: /View/Widget/TagWidget.php:69
+msgid "Or select some from this list:"
+msgstr "Sau selectează din lista asta:"
 

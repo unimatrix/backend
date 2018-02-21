@@ -9,6 +9,11 @@ var dump = function(what) { 'use strict';
         console.log(what);
 };
 
+// not defined? assume it
+if(typeof WEBROOT == 'undefined') WEBROOT = '/';
+if(typeof DEV_ENV == 'undefined') DEV_ENV = true;
+
+// start backend
 var Backend = function() { 'use strict';
     var store = {
 

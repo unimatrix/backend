@@ -30,7 +30,7 @@ class SearchForm extends Form
     protected function _buildValidator(Validator $validator) {
         return $validator->allowEmpty('search')->add('search', 'length', [
             'rule' => ['minLength', 2],
-            'message' => 'Search query is too short'
+            'message' => __d('Unimatrix/backend', 'Search query is too short')
         ]);
     }
 

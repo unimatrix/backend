@@ -66,7 +66,7 @@ class TagWidget extends BasicWidget
         // calculate existing tags
         $tags = null;
         if(isset($data['list'])) {
-            $tags = "<div class='list'><label>Or select some from this list:</label>";
+            $tags = "<div class='list'><label>" . __d('Unimatrix/backend', 'Or select some from this list:') . "</label>";
             $existing = explode(',', str_replace(', ', ',', $data['val']));
             foreach(explode(',', str_replace(', ', ',', $data['list'])) as $value)
                 $tags .= "<tag". (in_array($value, $existing) ? ' class="hidden"' : false) ."><div><span title='{$value}'>{$value}</span></div></tag>";

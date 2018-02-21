@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2018-02-13 12:52+0200\n"
+"POT-Creation-Date: 2018-02-21 15:43+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -28,6 +28,10 @@ msgstr ""
 
 #: /Controller/Component/AuthComponent.php:67
 msgid "You have successfully auto-logged in as {0}."
+msgstr ""
+
+#: /Form/Backend/SearchForm.php:33
+msgid "Search query is too short"
 msgstr ""
 
 #: /Template/Backend/Login/index.ctp:3
@@ -96,5 +100,13 @@ msgstr ""
 
 #: /Template/Layout/backend.ctp:75
 msgid "Generated in"
+msgstr ""
+
+#: /View/Widget/MediaWidget.php:75
+msgid "Full Image"
+msgstr ""
+
+#: /View/Widget/TagWidget.php:69
+msgid "Or select some from this list:"
 msgstr ""
 

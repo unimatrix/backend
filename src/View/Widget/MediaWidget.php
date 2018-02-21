@@ -72,7 +72,7 @@ class MediaWidget extends BasicWidget
         // create item
         $out = '<media id="' . Text::uuid(). '"' . ($new ? " class='new'" : null) . '>';
         $out .= $view->Html->image($new ? 'Unimatrix/Backend.widgets/media-plus.png' : $value);
-        $out .= $view->Html->link('<i class="fa fa-eye" aria-hidden="true"></i> Full Image', $new ? '#' : $value, ['escape' => false, 'target' => '_blank']);
+        $out .= $view->Html->link('<i class="fa fa-eye" aria-hidden="true"></i> ' . __d('Unimatrix/backend', 'Full Image'), $new ? '#' : $value, ['escape' => false, 'target' => '_blank']);
         $out .= '<i class="fa fa-times" aria-hidden="true"></i>';
         $out .= '</media>';
 
