@@ -11,7 +11,7 @@ use Cake\Controller\Component\AuthComponent as CakeAuthComponent;
  * Overwrite default Auth Component and add backend config and autologin
  *
  * @author Flavius
- * @version 1.3
+ * @version 1.4
  */
 class AuthComponent extends CakeAuthComponent
 {
@@ -19,29 +19,11 @@ class AuthComponent extends CakeAuthComponent
     private $ctrl;
 
     /**
-     * Our own config
-     * @var array
-     */
-    protected $_unimatrixConfig = [
-        'authenticate' => ['Unimatrix/Backend.Backend'],
-        'loginAction' => [
-            'controller' => 'Login',
-            'action' => 'index',
-            'plugin' => 'Unimatrix/Backend'
-        ],
-        'storage' => [
-            'className' => 'Session',
-            'key' => 'Auth.Backend'
-        ]
-    ];
-
-    /**
      * {@inheritDoc}
      * @see \Cake\Controller\Component\AuthComponent::__construct()
      */
     public function __construct(ComponentRegistry $registry, array $config = []) {
-        // add our own config
-        $config += $this->_unimatrixConfig;
+        // set some config stuff
         $config['cookieName'] = Configure::read('Backend.credentials.cookie', 'backend_credentials_remember');
         $config['authError'] = __d('Unimatrix/backend', 'You are not authorized to access that location.');
 

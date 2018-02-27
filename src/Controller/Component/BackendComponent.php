@@ -14,10 +14,26 @@ use Unimatrix\Backend\Form\Backend\SearchForm;
  * it also handles some custom backend logic and request filtering
  *
  * @author Flavius
- * @version 1.2
+ * @version 1.3
  */
 class BackendComponent extends Component
 {
+    // default config
+    protected $_defaultConfig = [
+        'Auth' => [
+            'authenticate' => ['Unimatrix/Backend.Backend'],
+            'loginAction' => [
+                'controller' => 'Login',
+                'action' => 'index',
+                'plugin' => 'Unimatrix/Backend'
+            ],
+            'storage' => [
+                'className' => 'Session',
+                'key' => 'Auth.Backend'
+            ]
+        ]
+    ];
+
     /**
      * {@inheritDoc}
      * @see \Cake\Controller\Component::initialize()
@@ -43,7 +59,7 @@ class BackendComponent extends Component
             'httpOnly' => Configure::read('Backend.security.enabled') ?: false
         ]);
         $controller->loadComponent('Unimatrix/Backend.Flash');
-        $controller->loadComponent('Unimatrix/Backend.Auth');
+        $controller->loadComponent('Unimatrix/Backend.Auth', $this->_config['Auth']);
     }
 
     /**
@@ -80,13 +96,6 @@ class BackendComponent extends Component
     }
 
     /**
-     * Variables for search
-     */
-    private $alias = null;
-    private $fields = [];
-    private $highlight = [];
-
-    /**
      * Handle search for actions
      * @param string $alias The table alias
      * @param array $fields The like fields in case of text only search
@@ -95,14 +104,12 @@ class BackendComponent extends Component
     public function search($alias, $fields = []) {
         // start
         $conditions = [];
-        $search = new SearchForm();
-
-        // set alias and fields
-        $this->alias = $alias;
-        $this->fields = $fields;
+        $form = new SearchForm();
+        $ctrl = $this->getController();
+        $search = new SearchLogic($alias, $fields);
 
         // on post
-        $request = $this->getController()->request;
+        $request = $ctrl->request;
         if($request->is('post')) {
             // mix and match query params with post search data
             $params = $request->getQueryParams();
@@ -122,7 +129,7 @@ class BackendComponent extends Component
                 $target .= '?' . $uri->getQuery();
 
             // redirect with brand new GET params
-            $this->getController()->redirect($target);
+            $ctrl->redirect($target);
 
         // on get
         } else {
@@ -130,27 +137,51 @@ class BackendComponent extends Component
             $term = $request->getQuery('search');
             if($term) {
                 // fill value and execute form
-                $this->getController()->request = $request->withData('search', $term);
-                if($search->execute($this->getController()->request->getData())) {
+                $ctrl->request = $request->withData('search', $term);
+                if($form->execute($ctrl->request->getData())) {
                     // do conditions
                     if(strpos($term, '||') !== false || strpos($term, '&&') !== false) {
                         foreach(explode('||', $term) as $one) {
                             if(strpos($one, '&&') !== false) {
                                 foreach(explode('&&', $one) as $two)
-                                    $conditions['OR']['AND'][] = $this->compute($two);
-                            } else $conditions['OR']['OR'][] = $this->compute($one);
+                                    $conditions['OR']['AND'][] = $search->compute($two);
+                            } else $conditions['OR']['OR'][] = $search->compute($one);
                         }
-                    } else $conditions = $this->compute($term);
+                    } else $conditions = $search->compute($term);
                 }
             }
         }
 
         // send to template
-        $this->getController()->set('search', $search);
-        $this->getController()->set('highlight', $this->highlight);
+        $ctrl->set('search', $form);
+        $ctrl->set('highlight', $search->highlight);
 
         // return computed conditions
         return $conditions;
+    }
+}
+
+/**
+ * Search logic class
+ *
+ * @author Flavius
+ * @version 1.0
+ */
+class SearchLogic
+{
+    // variables
+    private $alias = null;
+    private $fields = [];
+    public $highlight = [];
+
+    /**
+     * Constructor
+     * @param string $alias
+     * @param array $fields
+     */
+    public function __construct($alias, $fields = []) {
+        $this->alias = $alias;
+        $this->fields = $fields;
     }
 
     /**
@@ -158,7 +189,7 @@ class BackendComponent extends Component
      * @param string $term The search term
      * @return array of conditions with the `OR` key
      */
-    private function compute($term) {
+    public function compute($term) {
         // handle term
         $term = trim($term);
         if(!$term)

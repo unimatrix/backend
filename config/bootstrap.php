@@ -24,10 +24,12 @@ if(PHP_SAPI === 'cli'
 // attach middleware
 EventManager::instance()->on('Server.buildMiddleware', function ($event, $queue) {
     // EmailErrorHandlerMiddleware
-    $queue->insertAt(0, EmailErrorHandlerMiddleware::class);
+    $queue->insertBefore('Cake\Routing\Middleware\AssetMiddleware',
+        EmailErrorHandlerMiddleware::class);
 
     // WysiwygMiddleware
-    $queue->insertBefore('Cake\Routing\Middleware\AssetMiddleware', WysiwygMiddleware::class);
+    $queue->insertBefore('Cake\Routing\Middleware\AssetMiddleware',
+        WysiwygMiddleware::class);
 
     // EncryptedCookieMiddleware
     if(Configure::check('Backend.security.salt') && strlen(Configure::read('Backend.security.salt')) === 64)
