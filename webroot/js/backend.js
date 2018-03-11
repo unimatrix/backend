@@ -25,7 +25,7 @@ var Backend = function() { 'use strict';
                     $(this).addClass('hidden');
                 };
 
-            // bind click    
+            // bind click
             self.on('click', collapse);
 
             // autoclose
