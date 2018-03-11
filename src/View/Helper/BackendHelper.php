@@ -13,7 +13,7 @@ use Unimatrix\Cake\Lib\Lexicon;
  * it also handles some custom backend logic and template correction
  *
  * @author Flavius
- * @version 1.3
+ * @version 1.4
  */
 class BackendHelper extends Helper {
     // load other helpers
@@ -21,6 +21,7 @@ class BackendHelper extends Helper {
 
     // default config
     protected $_defaultConfig = [
+        'Layout' => 'Unimatrix/Backend.backend',
         'Minify' => [
             'compress' => [
                 'html' => true,
@@ -73,7 +74,8 @@ class BackendHelper extends Helper {
      */
     public function beforeRender(Event $event, $viewFile) {
         // switch layout to backend
-        $this->getView()->setLayout('Unimatrix/Backend.backend');
+        if($this->_config['Layout'])
+            $this->getView()->setLayout($this->_config['Layout']);
     }
 
     /**
