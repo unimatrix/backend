@@ -14,7 +14,7 @@ use Unimatrix\Backend\Form\Backend\SearchForm;
  * it also handles some custom backend logic and request filtering
  *
  * @author Flavius
- * @version 1.3
+ * @version 1.4
  */
 class BackendComponent extends Component
 {
@@ -95,6 +95,9 @@ class BackendComponent extends Component
         }
     }
 
+    // search to view variable
+    public $highlight = [];
+
     /**
      * Handle search for actions
      * @param string $alias The table alias
@@ -152,9 +155,12 @@ class BackendComponent extends Component
             }
         }
 
+        // add to global highlight
+        $this->highlight += $search->highlight;
+
         // send to template
         $ctrl->set('search', $form);
-        $ctrl->set('highlight', $search->highlight);
+        $ctrl->set('highlight', $this->highlight);
 
         // return computed conditions
         return $conditions;
