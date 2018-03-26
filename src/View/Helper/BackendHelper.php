@@ -83,7 +83,7 @@ class BackendHelper extends Helper {
      * - field isnt currently search and must be truncated? do that
      * - don't perform truncating in case field is search to display the hightlight
      *
-     * @param Cake\ORM\Entity $entity
+     * @param Entity $entity
      * @param string $field
      * @param array $options An array of options.
      *

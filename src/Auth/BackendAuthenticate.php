@@ -23,7 +23,7 @@ class BackendAuthenticate extends BaseAuthenticate
     /**
      * {@inheritDoc}
      * @see \Cake\Auth\BaseAuthenticate::authenticate()
-     * @throws RuntimException in case of configuration error
+     * @throws RuntimeException in case of configuration error
      */
     public function authenticate(ServerRequest $request, Response $response) {
         // get credentials from config
