@@ -19,7 +19,7 @@ use RuntimeException;
  * echo $this->Form->control('media2', ['type' => 'media', 'multiple' => true]);
  *
  * @author Flavius
- * @version 1.1
+ * @version 1.2
  */
 class MediaWidget extends BasicWidget
 {
@@ -36,6 +36,9 @@ class MediaWidget extends BasicWidget
             'Unimatrix/Backend.widgets/media.js',
         ]
     ];
+
+    // the empty value
+    private $emptyValue = '_to_empty_array_';
 
     /**
      * Load prerequisites
@@ -86,7 +89,11 @@ class MediaWidget extends BasicWidget
      * @param string $value
      * @return string
      */
-    protected function input($name, $value = '_to_empty_array_') {
+    protected function input($name, $value = false) {
+        // default empty value
+        if(!$value)
+            $value = $this->emptyValue;
+
         // return input
         return $this->_templates->format('input', [
             'name' => $name,

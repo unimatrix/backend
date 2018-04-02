@@ -24,6 +24,10 @@ div.picky-widget {
             transition: background .25s ease-in-out;
         }
 
+        div.picky-widget > div.list > pick.empty {
+            display: none;
+        }
+
         div.picky-widget > div.list > pick.active {
             background: #9631e3;
         }

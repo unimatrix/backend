@@ -2,7 +2,7 @@
  * Backend
  *
  * @author Flavius
- * @version 1.0
+ * @version 1.1
  */
 var dump = function(what) { 'use strict';
     if(typeof console != 'undefined')
@@ -32,6 +32,24 @@ var Backend = function() { 'use strict';
             if(!self.hasClass('error'))
                 window.setTimeout(function() { collapse.call(self); }, 3000);
         });
+
+    // instant flash message
+    }, flash = function(message, type) {
+        // get allowed css class
+        var cls = '';
+        if(type !== undefined && ['error', 'success'].indexOf(type) !== -1)
+            cls = type;
+
+        // on error delete the previous errors
+        if(cls == 'error') {
+            let c = $('body > div.error.flash.message');
+            if(c.length > 0)
+                c.remove();
+        }
+
+        // append message
+        $('body').append($('<div class="' + cls + ' flash message">'+ message +'</div>'));
+        _flash();
 
     // mobile side nav expansion
     }, _sidenav = function() {
@@ -78,7 +96,8 @@ var Backend = function() { 'use strict';
 
     // public, yay
     return {
-        init: __construct
+        init: __construct,
+        flash: flash
     };
 }();
 

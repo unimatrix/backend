@@ -17,7 +17,7 @@ use RuntimeException;
  * echo $this->Form->control('pick', ['type' => 'picky', 'list' => ['item1', 'item2', 'item3', 'item4']])
  *
  * @author Flavius
- * @version 1.0
+ * @version 1.1
  */
 class PickyWidget extends BasicWidget
 {
@@ -33,6 +33,9 @@ class PickyWidget extends BasicWidget
             'Unimatrix/Backend.widgets/picky.js',
         ]
     ];
+
+    // the empty value
+    private $emptyValue = '_to_empty_array_';
 
     /**
      * Load prerequisites
@@ -93,14 +96,18 @@ class PickyWidget extends BasicWidget
             $elements = $this->_templates->format('input', [
                 'name' => $data['name'] . '[]',
                 'type' => 'hidden',
-                'attrs' => ' value="_to_empty_array_"'
+                'attrs' => " value=\"{$this->emptyValue}\""
             ]);
         }
 
         // calculate existing ids
         $picky = "<div class='list'>";
-        foreach($data['list'] as $value)
-            $picky.= "<pick". (in_array($value, $data['val']) ? ' class="active"' : false) ."><div><span title='{$value}'>{$value}</span></div></pick>";
+        foreach($data['list'] as $value) {
+            $class = false;
+            if(in_array($value, $data['val'])) $class = 'active';
+            if($value == $this->emptyValue) $class = 'empty';
+            $picky.= "<pick". ($class ? " class=\"{$class}\"" : false) ."><div><span title='{$value}'>{$value}</span></div></pick>";
+        }
         $picky .= "</div>";
 
         // return the actual template for this input type
