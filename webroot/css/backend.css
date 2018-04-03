@@ -627,6 +627,11 @@ table tr td > span.nowrap {
     white-space: nowrap;
 }
 
+table tr td > span.break {
+    display: block;
+    word-break: break-all;
+}
+
 table tbody tr:nth-child(even) {
     background-color: #f8f8f8;
 }
