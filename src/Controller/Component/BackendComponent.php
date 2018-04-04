@@ -171,7 +171,7 @@ class BackendComponent extends Component
  * Search logic class
  *
  * @author Flavius
- * @version 1.0
+ * @version 1.1
  */
 class SearchLogic
 {
@@ -224,7 +224,7 @@ class SearchLogic
                     $field = rtrim($field, '!=');
                     $aliased = $this->buildAlias($field);
                     $expression = function($exp, $q) use($aliased, $value) {
-                        return $exp->notEq($aliased, $value);
+                        return $value === 'null' ? $exp->isNotNull($aliased) : $exp->notEq($aliased, $value);
                     };
                 break;
 
@@ -234,7 +234,7 @@ class SearchLogic
                 default:
                     $aliased = $this->buildAlias($field);
                     $expression = function($exp, $q) use($aliased, $value) {
-                        return $exp->eq($aliased, $value);
+                        return $value === 'null' ? $exp->isNull($aliased) : $exp->eq($aliased, $value);
                     };
                 break;
             }
