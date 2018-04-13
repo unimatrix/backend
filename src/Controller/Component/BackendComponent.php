@@ -6,6 +6,7 @@ use Cake\Event\Event;
 use Cake\Core\Configure;
 use Cake\I18n\FrozenTime;
 use Cake\Controller\Component;
+use Cake\Controller\Controller;
 use Unimatrix\Backend\Form\Backend\SearchForm;
 
 /**
@@ -14,7 +15,7 @@ use Unimatrix\Backend\Form\Backend\SearchForm;
  * it also handles some custom backend logic and request filtering
  *
  * @author Flavius
- * @version 1.4
+ * @version 1.5
  */
 class BackendComponent extends Component
 {
@@ -114,29 +115,10 @@ class BackendComponent extends Component
         // on post
         $request = $ctrl->request;
         if($request->is('post')) {
-            // mix and match query params with post search data
-            $params = $request->getQueryParams();
-            if(!$request->getData('search')) {
-                if(isset($params['search']))
-                    unset($params['search']);
-            } else {
-                $params['search'] = $request->getData('search');
-                if(isset($params['page']))
-                    unset($params['page']);
-            }
-
-            // build new uri
-            $uri = $request->getUri()->withQuery(http_build_query($params));
-            $target = $uri->getPath();
-            if($uri->getQuery())
-                $target .= '?' . $uri->getQuery();
-
-            // redirect with brand new GET params
-            $ctrl->redirect($target);
+            $this->handlePost($ctrl);
 
         // on get
         } else {
-            // get term
             $term = $request->getQuery('search');
             if($term) {
                 // fill value and execute form
@@ -164,6 +146,38 @@ class BackendComponent extends Component
 
         // return computed conditions
         return $conditions;
+    }
+
+    /**
+     * Handle post to mix and match parameters
+     * @param Controller $controller
+     * @param array $options
+     * @return \Cake\Http\Response|NULL
+     */
+    protected function handlePost(Controller $controller, $options = ['search']) {
+        // get request & params
+        $request = $controller->request;
+        $params = $request->getQueryParams();
+
+        // mix and match parameters with post data
+        foreach($options as $type) {
+            if(isset($params[$type]) && $request->getData($type) !== null && !$request->getData($type))
+                unset($params[$type]);
+            if($request->getData($type)) {
+                $params[$type] = $request->getData($type);
+                if(isset($params['page']))
+                    unset($params['page']);
+            }
+        }
+
+        // build new uri
+        $uri = $request->getUri()->withQuery(http_build_query($params));
+        $target = $uri->getPath();
+        if($uri->getQuery())
+            $target .= '?' . $uri->getQuery();
+
+        // redirect with brand new GET params
+        return $controller->redirect($target);
     }
 }
 
