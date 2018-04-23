@@ -47,7 +47,7 @@ class AuthComponent extends CakeAuthComponent
             $result = $this->login();
             if($result) {
                 $this->ctrl->Flash->set(__d('Unimatrix/backend', 'You have successfully auto-logged in as {0}.', ucfirst($this->user('username'))));
-                return $this->ctrl->redirect($this->ctrl->request->getRequestTarget());
+                return $this->ctrl->redirect($this->ctrl->getRequest()->getRequestTarget());
 
             // bad cookie
             } else $this->ctrl->Cookie->delete($this->_config['cookieName']);
@@ -72,12 +72,12 @@ class AuthComponent extends CakeAuthComponent
             $this->setUser($user);
 
             // write cookie if remember me was checked
-            if((bool)$this->ctrl->request->getData('remember', 0))
+            if((bool)$this->ctrl->getRequest()->getData('remember', 0))
                 $this->ctrl->Cookie->write($this->_config['cookieName'], $user, ['expire' => '+1 month']);
 
             // redirect to backend (or wherever he was) after login
             $redirect = $this->redirectUrl();
-            return $redirect == '/' ? '/' . $this->ctrl->request->getParam('prefix') : $redirect;
+            return $redirect == '/' ? '/' . $this->ctrl->getRequest()->getParam('prefix') : $redirect;
 
         // user could not be identified
         } else return false;

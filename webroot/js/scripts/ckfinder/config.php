@@ -28,7 +28,7 @@ $config = [];
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_authentication
 
 $config['authentication'] = function () use($request) {
-    return Configure::read('Backend.credentials.username') === $request->session()->read('Auth.Backend.username');
+    return Configure::read('Backend.credentials.username') === $request->getSession()->read('Auth.Backend.username');
 };
 
 /*============================ License Key ============================================*/

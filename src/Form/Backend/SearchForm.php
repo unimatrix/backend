@@ -24,21 +24,16 @@ class SearchForm extends Form
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Cake\Form\Form::_buildValidator()
+     * Validation rules
+     * @param Validator $validator
+     * @return \Cake\Validation\Validator
      */
-    protected function _buildValidator(Validator $validator) {
-        return $validator->allowEmpty('search')->add('search', 'length', [
+    public function validationDefault(Validator $validator) {
+        $validator->allowEmpty('search')->add('search', 'length', [
             'rule' => ['minLength', 2],
             'message' => __d('Unimatrix/backend', 'Search query is too short')
         ]);
-    }
 
-    /**
-     * (non-PHPdoc)
-     * @see \Cake\Form\Form::_execute()
-     */
-    protected function _execute(array $data) {
-        return true;
+        return $validator;
     }
 }

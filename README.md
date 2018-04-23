@@ -20,9 +20,10 @@ The recommended way to install composer packages is:
 composer require unimatrix/backend:^3.0
 ```
 
-Don't forget to add it to bootstrap
+Don't forget to load it in your bootstrap function inside `Application.php`
 ```
-Plugin::load('Unimatrix/Backend', ['routes' => true, 'bootstrap' => true]);
+    $this->addPlugin('Unimatrix/Cake');
+    $this->addPlugin('Unimatrix/Backend');
 ```
 
 ## Configuration

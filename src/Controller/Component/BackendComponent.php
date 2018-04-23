@@ -44,7 +44,7 @@ class BackendComponent extends Component
 
         // we need these
         $controller = $this->getController();
-        $request = $controller->request;
+        $request = $controller->getRequest();
 
         // load security
         if(Configure::read('Backend.security.enabled')) {
@@ -69,7 +69,7 @@ class BackendComponent extends Component
      */
     public function startup(Event $event) {
         // fix incomming data from widgets
-        $request = $this->getController()->request;
+        $request = $this->getController()->getRequest();
         if($request->is('post')) {
             $body = $request->getParsedBody();
             if(is_array($body)) {
@@ -91,7 +91,7 @@ class BackendComponent extends Component
 
                 // request changed, overwrite request
                 if($dirty)
-                    $this->getController()->request = $request->withParsedBody($body);
+                    $this->getController()->setRequest($request->withParsedBody($body));
             }
         }
     }
@@ -113,7 +113,7 @@ class BackendComponent extends Component
         $search = new SearchLogic($alias, $fields);
 
         // on post
-        $request = $ctrl->request;
+        $request = $ctrl->getRequest();
         if($request->is('post')) {
             $this->handlePost($ctrl);
 
@@ -122,8 +122,8 @@ class BackendComponent extends Component
             $term = $request->getQuery('search');
             if($term) {
                 // fill value and execute form
-                $ctrl->request = $request->withData('search', $term);
-                if($form->execute($ctrl->request->getData())) {
+                $ctrl->setRequest($request->withData('search', $term));
+                if($form->execute($ctrl->getRequest()->getData())) {
                     // do conditions
                     if(strpos($term, '||') !== false || strpos($term, '&&') !== false) {
                         foreach(explode('||', $term) as $one) {
@@ -156,7 +156,7 @@ class BackendComponent extends Component
      */
     protected function handlePost(Controller $controller, $options = ['search']) {
         // get request & params
-        $request = $controller->request;
+        $request = $controller->getRequest();
         $params = $request->getQueryParams();
 
         // mix and match parameters with post data

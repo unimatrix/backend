@@ -20,7 +20,7 @@ class LoginController extends AppController
             return $this->redirect(['action' => 'logout']);
 
         // perform login
-        if($this->request->is('post')) {
+        if($this->getRequest()->is('post')) {
             $result = $this->Auth->login();
             if($result) {
                 $this->Flash->success(__d('Unimatrix/backend', 'You have successfully logged in as {0}.', ucfirst($this->Auth->user('username'))));
