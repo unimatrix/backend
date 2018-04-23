@@ -4,11 +4,11 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/unimatrix/backend.svg?style=flat-square)](https://packagist.org/packages/unimatrix/backend/stats)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/unimatrix/backend/master/LICENSE)
 
-Backend for CakePHP 3.5
+Backend for CakePHP 3.6
 
 ## Requirements
-* PHP >= 7
-* CakePHP >= 3.5
+* PHP >= 7.2
+* CakePHP >= 3.6
 
 ## Installation
 
@@ -17,7 +17,7 @@ You can install this plugin into your CakePHP application using [composer](http:
 The recommended way to install composer packages is:
 
 ```
-composer require unimatrix/backend:^2.0
+composer require unimatrix/backend:^3.0
 ```
 
 Don't forget to add it to bootstrap
