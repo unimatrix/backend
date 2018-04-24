@@ -1,0 +1,5 @@
+Extra Plugins used
+------------------------------
+
+https://ckeditor.com/cke4/addon/iframe
+https://ckeditor.com/cke4/addon/justify

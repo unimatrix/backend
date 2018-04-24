@@ -15,6 +15,7 @@ Widgets.wysiwyg = function() { 'use strict';
     // the config object
     }, _config = function() {
         return {
+            embed_provider: '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}',
             filebrowserBrowseUrl: CKFINDER_BASEPATH + 'ckfinder.html',
             filebrowserImageBrowseUrl: CKFINDER_BASEPATH + 'ckfinder.html?type=Images',
             filebrowserUploadUrl: CKFINDER_BASEPATH + 'core/connector/php/connector.php?type=Files&command=QuickUpload',
