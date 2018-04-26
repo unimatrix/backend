@@ -20,6 +20,12 @@ use Unimatrix\Backend\Http\Middleware\EncryptedCookieMiddleware;
 class Plugin extends BasePlugin
 {
     /**
+     * Plugin name
+     * @var string
+     */
+    protected $name = 'Unimatrix/Backend';
+
+    /**
      * Should this plugin be activated
      * @return bool
      */

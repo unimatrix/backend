@@ -19,7 +19,7 @@ use RuntimeException;
  * echo $this->Form->control('media2', ['type' => 'media', 'multiple' => true]);
  *
  * @author Flavius
- * @version 1.2
+ * @version 1.3
  */
 class MediaWidget extends BasicWidget
 {
@@ -89,10 +89,10 @@ class MediaWidget extends BasicWidget
      * @param string $value
      * @return string
      */
-    protected function input($name, $value = false) {
+    protected function input($name, $value = false, $multiple = false) {
         // default empty value
         if(!$value)
-            $value = $this->emptyValue;
+            $value = $multiple ? $this->emptyValue : null;
 
         // return input
         return $this->_templates->format('input', [
@@ -139,9 +139,9 @@ class MediaWidget extends BasicWidget
             if($hval) {
                 foreach($hval as $item) {
                     $list .= $this->item($data['view'], $item, false);
-                    $inputs .= $this->input($data['name'], $item);
+                    $inputs .= $this->input($data['name'], $item, true);
                 }
-            } else $inputs .= $this->input($data['name']);
+            } else $inputs .= $this->input($data['name'], false, true);
 
             // add the empty item
             $list .= $this->item($data['view'], null, true);

@@ -81,11 +81,13 @@ class CalendarWidget extends BasicWidget
         unset($data['val']);
 
         // transform into frozen time (if not already)
-        if(!$data['value'] instanceof DateTimeInterface)
-            $data['value'] = new FrozenTime($data['value']);
+        if($data['value']) {
+            if(!$data['value'] instanceof DateTimeInterface)
+                $data['value'] = new FrozenTime($data['value']);
 
-        // set value
-        $data['value'] = $data['value']->format('d-M-Y');
+            // set value
+            $data['value'] = $data['value']->format('d-M-Y');
+        }
 
         // create input
         $input = $this->_templates->format('input', [

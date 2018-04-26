@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * This middleware will serve the ckfinder php correctly
  *
  * @author Flavius
- * @version 1.0
+ * @version 1.1
  */
 class WysiwygMiddleware
 {
@@ -27,7 +27,7 @@ class WysiwygMiddleware
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $next)
     {
         // got wysiwyg? get that and stop execution
-        $wysiwyg = $this->_checkWysiwyg($request->getUri()->getPath());
+        $wysiwyg = $this->isCKFinder($request->getUri()->getPath());
         if($wysiwyg) {
             require $wysiwyg;
             exit;
@@ -42,10 +42,10 @@ class WysiwygMiddleware
      * @param string $url
      * @return string or bool
      */
-    protected function _checkWysiwyg($url) {
+    private function isCKFinder($url) {
         // match wysiwyg path
         if(strpos($url, 'ckfinder/core/connector/php/connector.php') !== false) {
-            $assetFile = $this->_getAssetFile($url);
+            $assetFile = $this->getAssetFile($url);
             if($assetFile)
                 return $assetFile;
         }
@@ -59,7 +59,7 @@ class WysiwygMiddleware
      * @param string $url
      * @return string or bool
      */
-    protected function _getAssetFile($url) {
+    private function getAssetFile($url) {
         // do plugin webroot path
         $parts = [];
         $segments = explode('/', ltrim($url, '/'));
