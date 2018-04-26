@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "unimatrix/cake": "^3.0",
-        "unimatrix/ckfinder": "~1.0"
+        "unimatrix/ckfinder": "^3.0"
     },
     "autoload": {
         "psr-4": {
