@@ -2,7 +2,7 @@
  * Media widget
  *
  * @author Flavius
- * @version 1.1
+ * @version 1.2
  */
 if(typeof Widgets === 'undefined') var Widgets = {};
 Widgets.media = function() { 'use strict';
@@ -25,7 +25,7 @@ Widgets.media = function() { 'use strict';
      **/
     }, _uuid = function() {
         var lut = [];
-        for (var i = 0; i < 256; i++) 
+        for (var i = 0; i < 256; i++)
             lut[i] = (i < 16 ? '0' : '') + (i).toString(16);
 
         var d0 = Math.random() * 0xffffffff|0;
@@ -37,7 +37,7 @@ Widgets.media = function() { 'use strict';
             lut[d1&0xff]+lut[d1>>8&0xff]+'-'+lut[d1>>16&0x0f|0x40]+lut[d1>>24&0xff]+'-'+
             lut[d2&0x3f|0x80]+lut[d2>>8&0xff]+'-'+lut[d2>>16&0xff]+lut[d2>>24&0xff]+
             lut[d3&0xff]+lut[d3>>8&0xff]+lut[d3>>16&0xff]+lut[d3>>24&0xff];
-        
+
     // ckfinder popup open
     }, _popup = function(url, title, win) {
         let w = store.ckfinder.width,
@@ -52,6 +52,9 @@ Widgets.media = function() { 'use strict';
 
     // add media
     }, _add = function(ctrl, value) {
+        // find url base
+        let base = WEBROOT.replace(window.location.origin, '').slice(0, -1);
+
         // multiple rule?
         if(ctrl.container.hasClass('multiple')) {
             // found duplicate?
@@ -89,11 +92,11 @@ Widgets.media = function() { 'use strict';
             }
 
             // update multiple values
-            _value(ctrl.container);
+            _value(ctrl.container, base);
 
         // single rule
         } else {
-            ctrl.input.val(value);
+            ctrl.input.val(value.replace(base, ''));
             ctrl.media.removeClass('new');
             ctrl.media.find('img').attr('src', value);
             ctrl.media.find('a').attr('href', value);
@@ -101,12 +104,15 @@ Widgets.media = function() { 'use strict';
 
     // remove media
     }, _remove = function(ctrl) {
+        // find url base
+        let base = WEBROOT.replace(window.location.origin, '').slice(0, -1);
+
         // multiple rule?
         if(ctrl.container.hasClass('multiple')) {
             ctrl.media.addClass('deleted');
             window.setTimeout(function() {
                 ctrl.media.remove();
-                _value(ctrl.container);
+                _value(ctrl.container, base);
             }, 300);
 
         // single rule
@@ -118,14 +124,14 @@ Widgets.media = function() { 'use strict';
         }
 
     // calculate new values
-    }, _value = function(container) {
+    }, _value = function(container, base) {
         var list = [],
             input = container.find('input[type="hidden"]'),
             name = input.attr('name');
 
         // go through each image in list
         container.find('div.list > media:not(.new) > img').each(function() {
-            list.push($(this).attr('src'));
+            list.push($(this).attr('src').replace(base, ''));
         });
 
         // change inputs

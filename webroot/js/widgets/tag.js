@@ -1,6 +1,6 @@
 /**
  * Tag widget
- * 
+ *
  * @author Flavius
  * @version 1.0
  */

@@ -2,7 +2,7 @@
  * Wysiwyg widget
  *
  * @author Flavius
- * @version 1.0
+ * @version 1.1
  */
 if(typeof Widgets === 'undefined') var Widgets = {};
 Widgets.wysiwyg = function() { 'use strict';
