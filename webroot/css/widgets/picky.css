@@ -21,7 +21,11 @@ div.picky-widget {
             position: relative;
             cursor: pointer;
             background: #e8e8e8;
-            transition: background .25s ease-in-out;
+            transition: background .15s ease-in-out;
+        }
+
+        div.picky-widget > div.list > pick:hover {
+            background: #cacaca;
         }
 
         div.picky-widget > div.list > pick.empty {
@@ -29,6 +33,10 @@ div.picky-widget {
         }
 
         div.picky-widget > div.list > pick.active {
+            background: #a64ee7;
+        }
+
+        div.picky-widget > div.list > pick.active:hover {
             background: #9631e3;
         }
 
@@ -39,7 +47,7 @@ div.picky-widget {
                 max-width: 100%;
                 padding: 0.3em 0.5em;
                 color: black;
-                transition: color .25s ease-in-out;
+                transition: color .15s ease-in-out;
             }
 
             div.picky-widget > div.list > pick.active > div {

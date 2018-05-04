@@ -50,6 +50,10 @@ div.calendar-widget {
     transform: initial;
 }
 
+.pignose-calendar-wrapper .pignose-calendar .pignose-calendar-button-group .pignose-calendar-button {
+    font-weight: normal;
+}
+
 .pignose-calendar-wrapper .pignose-calendar .pignose-calendar-button-group .pignose-calendar-button-apply {
     background-color: #1798A5;
 }
@@ -62,12 +66,12 @@ div.calendar-widget {
 }
 
 .pignose-calendar .pignose-calendar-top .pignose-calendar-top-date {
-    padding: 1.3rem 0 0 0;
+    padding: 1.2rem 0 0 0;
 }
 
 .pignose-calendar .pignose-calendar-top .pignose-calendar-top-month {
     margin-bottom: 0px;
-    font-size: 120%;
+    font-weight: 400;
 }
 
 .pignose-calendar .pignose-calendar-top .pignose-calendar-top-year {
@@ -82,6 +86,15 @@ div.calendar-widget {
 .pignose-calendar .pignose-calendar-header .pignose-calendar-week {
     height: auto;
     line-height: 2.2rem;
+    font-family: Arial;
+    font-size: 15px;
+}
+
+.pignose-calendar .pignose-calendar-header .pignose-calendar-week.pignose-calendar-week-sat,
+.pignose-calendar .pignose-calendar-header .pignose-calendar-week.pignose-calendar-week-sun,
+.pignose-calendar .pignose-calendar-unit.pignose-calendar-unit-sat a,
+.pignose-calendar .pignose-calendar-unit.pignose-calendar-unit-sun a {
+    color: #9631e3;
 }
 
 .pignose-calendar .pignose-calendar-body {

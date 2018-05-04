@@ -108,5 +108,5 @@ msgstr "Toată Imaginea"
 
 #: /View/Widget/TagWidget.php:69
 msgid "Or select some from this list:"
-msgstr "Sau selectează din lista asta:"
+msgstr "Sau selectează din această listă:"
 

@@ -42,7 +42,7 @@ div.stepper-widget:hover {
         line-height: 1.1;
         color: #1798A5;
         cursor: pointer;
-        transition: background 0.25s ease-in-out;
+        transition: background 0.15s ease-in-out;
     }
 
     div.stepper-widget > span.button-stepper:hover {
