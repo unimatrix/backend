@@ -15,7 +15,7 @@ use Unimatrix\Backend\Form\Backend\SearchForm;
  * it also handles some custom backend logic and request filtering
  *
  * @author Flavius
- * @version 1.5
+ * @version 1.6
  */
 class BackendComponent extends Component
 {
@@ -224,7 +224,7 @@ class SearchLogic
             $value = ltrim($term, '#');
             $this->buildHighlight($field, $value);
             $conditions = function($exp, $q) use($field, $value) {
-                return $exp->eq("{$this->alias}.{$field}", $value);
+                return $exp->eq($this->buildAlias($field), $value);
             };
 
         // search by field (..date_format(field1, '%x%v')=:201807 && field2!=:TestNot && Alias.field3:TestIsWithAlias..)
@@ -263,7 +263,7 @@ class SearchLogic
                 $value = $term;
                 $this->buildHighlight($field, $value);
                 $conditions[] = function($exp, $q) use($field, $value) {
-                    return $exp->like("{$this->alias}.{$field}", "%{$value}%");
+                    return $exp->like($this->buildAlias($field), "%{$value}%");
                 };
             }
         }
