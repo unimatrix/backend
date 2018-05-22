@@ -1,6 +1,6 @@
 <?php
 
-namespace Unimatrix\Backend\Test\TestCase\Test\TestCase;
+namespace Unimatrix\Backend\Test\TestCase;
 
 use Cake\TestSuite\TestCase;
 use Cake\Core\Configure;
