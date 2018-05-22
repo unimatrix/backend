@@ -32,8 +32,12 @@ class Plugin extends BasePlugin
     protected function inEffect() {
         $url = explode('/', ServerRequestFactory::fromGlobals()->getPath());
 
+        // no backend config? abort
+        if(!Configure::read('Backend'))
+            return false;
+
         // not backend? abort
-        if(Configure::read('Backend') && !($url[1] === 'backend' || ($url[1] === 'unimatrix' && $url[2] === 'backend')))
+        if(!($url[1] === 'backend' || ($url[1] === 'unimatrix' && $url[2] === 'backend')))
             return false;
 
         // valid

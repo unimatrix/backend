@@ -1,13 +1,15 @@
 # Unimatrix Backend
 
-[![Version](https://img.shields.io/packagist/v/unimatrix/backend.svg?style=flat-square)](https://packagist.org/packages/unimatrix/backend)
-[![Total Downloads](https://img.shields.io/packagist/dt/unimatrix/backend.svg?style=flat-square)](https://packagist.org/packages/unimatrix/backend/stats)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/unimatrix/backend/master/LICENSE)
+[![Build Status](https://api.travis-ci.org/unimatrix/backend.svg?branch=master)](https://travis-ci.org/unimatrix/backend)
+[![Coverage Status](https://codecov.io/gh/unimatrix/backend/branch/master/graph/badge.svg)](https://codecov.io/gh/unimatrix/backend)
+[![Latest Stable Version](https://poser.pugx.org/unimatrix/backend/v/stable.svg)](https://packagist.org/packages/unimatrix/backend)
+[![License](https://poser.pugx.org/unimatrix/backend/license.svg)](https://packagist.org/packages/unimatrix/backend)
+[![Total Downloads](https://poser.pugx.org/unimatrix/backend/d/total.svg)](https://packagist.org/packages/unimatrix/backend)
 
 Backend for CakePHP 3.6
 
 ## Requirements
-* PHP >= 7.2
+* PHP >= 7.1
 * CakePHP >= 3.6
 
 ## Installation
@@ -82,4 +84,3 @@ Router::prefix('backend', function(RouteBuilder $routes) {
     $routes->connect('/', ['controller' => 'Dashboard', 'action' => 'index']);
 });
 ```
-
