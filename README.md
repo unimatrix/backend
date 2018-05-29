@@ -3,7 +3,7 @@
 [![Build Status](https://api.travis-ci.org/unimatrix/backend.svg?branch=master)](https://travis-ci.org/unimatrix/backend)
 [![Coverage Status](https://codecov.io/gh/unimatrix/backend/branch/master/graph/badge.svg)](https://codecov.io/gh/unimatrix/backend)
 [![Latest Stable Version](https://poser.pugx.org/unimatrix/backend/v/stable.svg)](https://packagist.org/packages/unimatrix/backend)
-[![License](https://poser.pugx.org/unimatrix/backend/license.svg)](https://packagist.org/packages/unimatrix/backend)
+[![License](https://poser.pugx.org/unimatrix/backend/license.svg)](https://github.com/unimatrix/backend/blob/master/LICENSE)
 [![Total Downloads](https://poser.pugx.org/unimatrix/backend/d/total.svg)](https://packagist.org/packages/unimatrix/backend)
 
 Backend for CakePHP 3.6
