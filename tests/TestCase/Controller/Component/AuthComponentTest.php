@@ -35,7 +35,7 @@ class AuthComponentTest extends TestCase
             ]
         ]);
 
-        $this->assertArraySubset($credentials, $controller->viewVars['auth']);
+        $this->assertEquals($credentials, $controller->viewVars['auth']);
     }
 
     public function testWithInvalidAutoLoginCookie() {
@@ -67,7 +67,7 @@ class AuthComponentTest extends TestCase
         $controller->loadComponent('Unimatrix/Backend.Backend');
 
         unset($credentials['password']);
-        $this->assertArraySubset($credentials, $controller->Auth->user());
+        $this->assertEquals($credentials, $controller->Auth->user());
     }
 
     public function testInvalidLogin() {
@@ -98,9 +98,9 @@ class AuthComponentTest extends TestCase
 
         $return = $controller->Auth->login();
         $this->assertEquals('/' . $prefix, $return);
-        $this->assertArraySubset($credentials, $controller->Cookie->read($remember));
+        $this->assertEquals($credentials, $controller->Cookie->read($remember));
         unset($credentials['password']);
-        $this->assertArraySubset($credentials, $controller->Auth->user());
+        $this->assertEquals($credentials, $controller->Auth->user());
     }
 
     public function testPasswordIsStripped() {

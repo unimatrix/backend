@@ -49,7 +49,7 @@ class BackendAuthenticateTest extends TestCase
         ]);
         $auth = new BackendAuthenticate($this->registry);
 
-        $this->assertArraySubset($credentials, $auth->authenticate($request, $this->response));
+        $this->assertEquals($credentials, $auth->authenticate($request, $this->response));
     }
 
     public function testSuccessFromCookieData() {
@@ -60,6 +60,6 @@ class BackendAuthenticateTest extends TestCase
         $request = new ServerRequest(['cookies' => [$remember => $credentials]]);
         $auth = new BackendAuthenticate($this->registry);
 
-        $this->assertArraySubset($credentials, $auth->authenticate($request, $this->response));
+        $this->assertEquals($credentials, $auth->authenticate($request, $this->response));
     }
 }
