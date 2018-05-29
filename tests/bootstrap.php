@@ -22,4 +22,3 @@ chdir($root);
 
 require $root . '/vendor/autoload.php';
 require $root . '/vendor/cakephp/cakephp/tests/bootstrap.php';
-require 'test_files/AppController.php';
