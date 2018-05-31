@@ -32,14 +32,7 @@ class WysiwygMiddleware
         if($wysiwyg) {
             $config = str_replace('core' . DS . 'connector' . DS . 'php' . DS . 'connector.php', 'config.php', $wysiwyg);
             $ckfinder = new CKFinder($config, $request);
-            $symfonyRequest = Request::create($request->getUri(),
-                $request->getMethod(),
-                $request->getQueryParams(),
-                $request->getCookieParams(),
-                $request->getUploadedFiles(),
-                $request->getServerParams(),
-                $request->getBody()
-            );
+            $symfonyRequest = Request::createFromGlobals();
             $symfonyResponse = $ckfinder->handle($symfonyRequest);
 
             ob_start(); // symfony cleared this :(

@@ -16,6 +16,8 @@ class WysiwygMiddlewareTest extends TestCase
 
     public function tearDown() {
         parent::tearDown();
+        $_GET = [];
+        Plugin::unload();
         $folder = new Folder($this->path);
         $folder->delete();
     }
@@ -32,7 +34,9 @@ class WysiwygMiddlewareTest extends TestCase
     }
 
     public function testPluginNotLoaded() {
-        $request = new ServerRequest(['url' => '/unimatrix/backend/js/scripts/ckfinder/core/connector/php/connector.php']);
+        $request = new ServerRequest([
+            'url' => '/unimatrix/backend/js/scripts/ckfinder/core/connector/php/connector.php'
+        ]);
         $response = new Response();
         $next = function ($req, $res) {
             $this->assertEmpty((string)$res);
@@ -53,11 +57,13 @@ class WysiwygMiddlewareTest extends TestCase
         ]);
         Plugin::load('Unimatrix/Backend', ['path' => PLUGIN_PATH . DS]);
         $request = new ServerRequest([
-            'url' => '/unimatrix/backend/js/scripts/ckfinder/core/connector/php/connector.php?command=Init&lang=en&type=Images',
-            'environment' => [
-                'REQUEST_METHOD' => 'GET'
-            ]
+            'url' => 'unimatrix/backend/js/scripts/ckfinder/core/connector/php/connector.php'
         ]);
+        $_GET = [
+            'command' => 'Init',
+            'lang' => 'en',
+            'type' => 'Images'
+        ];
         $response = new Response();
         $next = function ($req, $res) {};
         $middleware = new WysiwygMiddleware();
