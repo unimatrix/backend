@@ -4,15 +4,17 @@ namespace Unimatrix\Backend\Routing\Middleware;
 
 use Cake\Core\Plugin;
 use Cake\Utility\Inflector;
+use CKSource\CKFinder\CKFinder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Wysiwyg (What You See Is What You Get)
  * This middleware will serve the ckfinder php correctly
  *
  * @author Flavius
- * @version 1.1
+ * @version 1.2
  */
 class WysiwygMiddleware
 {
@@ -24,17 +26,27 @@ class WysiwygMiddleware
      * @param callable $next Callback to invoke the next middleware.
      * @return \Psr\Http\Message\ResponseInterface A response
      */
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $next)
-    {
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $next) {
         // got wysiwyg? get that and stop execution
         $wysiwyg = $this->isCKFinder($request->getUri()->getPath());
         if($wysiwyg) {
-            require $wysiwyg;
-            exit;
-        }
+            $config = str_replace('core' . DS . 'connector' . DS . 'php' . DS . 'connector.php', 'config.php', $wysiwyg);
+            $ckfinder = new CKFinder($config, $request);
+            $symfonyRequest = Request::create($request->getUri(),
+                $request->getMethod(),
+                $request->getQueryParams(),
+                $request->getCookieParams(),
+                $request->getUploadedFiles(),
+                $request->getServerParams(),
+                $request->getBody()
+            );
+            $symfonyResponse = $ckfinder->handle($symfonyRequest);
+
+            ob_start(); // symfony cleared this :(
+            return $response->withType('json')->withStringBody($symfonyResponse->getContent());
 
         // not wysiwyg? next!
-        return $next($request, $response);
+        } else return $next($request, $response);
     }
 
     /**
@@ -45,8 +57,8 @@ class WysiwygMiddleware
     private function isCKFinder($url) {
         // match wysiwyg path
         if(strpos($url, 'ckfinder/core/connector/php/connector.php') !== false) {
-            $assetFile = $this->getAssetFile($url);
-            if($assetFile)
+            $assetFile = $this->_getAssetFile($url);
+            if($assetFile !== null && file_exists($assetFile))
                 return $assetFile;
         }
 
@@ -55,30 +67,26 @@ class WysiwygMiddleware
     }
 
     /**
-     * Find the asset file location
-     * @param string $url
-     * @return string or bool
+     * Builds asset file path based off url
+     * @param string $url Asset URL
+     * @return string Absolute path for asset file
      */
-    private function getAssetFile($url) {
-        // do plugin webroot path
-        $parts = [];
-        $segments = explode('/', ltrim($url, '/'));
+    protected function _getAssetFile($url) {
+        $parts = explode('/', ltrim($url, '/'));
+        $pluginPart = [];
         for($i = 0; $i < 2; $i++) {
-            if(!isset($segments[$i]))
+            // @codeCoverageIgnoreStart
+            if(!isset($parts[$i]))
                 break;
-
-            $parts[] = Inflector::camelize($segments[$i]);
-            $plugin = implode('/', $parts);
-
+            // @codeCoverageIgnoreEnd
+            $pluginPart[] = Inflector::camelize($parts[$i]);
+            $plugin = implode('/', $pluginPart);
             if($plugin && Plugin::loaded($plugin)) {
-                $segments = array_slice($segments, $i + 1);
-                $pluginWebrootPath = str_replace('/', DS, Plugin::path($plugin)) . 'webroot' . DS . implode(DS, $segments);
-                if(file_exists($pluginWebrootPath))
-                    return $pluginWebrootPath;
+                $parts = array_slice($parts, $i + 1);
+                $fileFragment = implode(DIRECTORY_SEPARATOR, $parts);
+                $pluginWebroot = Plugin::path($plugin) . 'webroot' . DIRECTORY_SEPARATOR;
+                return $pluginWebroot . $fileFragment;
             }
         }
-
-        // not found?
-        return false;
     }
 }
