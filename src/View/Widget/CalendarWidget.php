@@ -18,7 +18,7 @@ use DateTimeInterface;
  * echo $this->Form->control('date', ['type' => 'calendar']);
  *
  * @author Flavius
- * @version 1.0
+ * @version 1.1
  */
 class CalendarWidget extends BasicWidget
 {
@@ -104,10 +104,6 @@ class CalendarWidget extends BasicWidget
      * Security above all
      */
     public function secureFields(array $data) {
-        $data['name'] = '_calendar_input_' . $data['name'];
-        if (!isset($data['name']) || $data['name'] === '')
-            return [];
-
-        return [$data['name']];
+        return ['_calendar_input_' . ($data['name'] ?? null)];
     }
 }
