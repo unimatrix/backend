@@ -89,6 +89,7 @@ namespace Unimatrix\Backend\Test\TestCase\Controller\Backend {
             Router::connect('/login', ['controller' => 'Login', 'action' => 'index', 'plugin' => 'Unimatrix/Backend']);
             $this->controller->Auth->setUser(['username' => 'user']);
             $this->controller->logout();
+            Router::reload();
         }
     }
 }

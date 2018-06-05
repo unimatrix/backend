@@ -140,5 +140,6 @@ class AuthComponentTest extends TestCase
 
         $this->assertEquals($url, $controller->Auth->logout());
         $this->assertNull($controller->Auth->user());
+        Router::reload();
     }
 }

@@ -25,16 +25,14 @@ class CalendarWidgetTest extends TestCase
 		$view = new View(null);
 		$helper = new BackendHelper($view);
 		$this->data = [
-		    'view' => $helper->getView()
+		    'view' => $helper->getView(),
+		    'name' => 'created'
 		];
     }
 
     public function testWidgetHtmlNoValue() {
         $text = new CalendarWidget($this->templates);
-        $data = $this->data + [
-            'name' => 'created',
-        ];
-        $result = $text->render($data, $this->context);
+        $result = $text->render($this->data, $this->context);
 
         $expected = [
             'div' => ['class' => 'calendar-widget'],
@@ -51,7 +49,6 @@ class CalendarWidgetTest extends TestCase
     public function testWidgetHtmlWithObjectValue() {
         $text = new CalendarWidget($this->templates);
         $data = $this->data + [
-            'name' => 'created',
             'val' => new FrozenTime('12-12-2017')
         ];
         $result = $text->render($data, $this->context);
@@ -72,7 +69,6 @@ class CalendarWidgetTest extends TestCase
     public function testWidgetHtmlWithStringValue() {
         $text = new CalendarWidget($this->templates);
         $data = $this->data + [
-            'name' => 'created',
             'val' => '12-12-2017'
         ];
         $result = $text->render($data, $this->context);
