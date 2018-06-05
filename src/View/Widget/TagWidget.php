@@ -3,7 +3,7 @@
 namespace Unimatrix\Backend\View\Widget;
 
 use Cake\View\View;
-use Cake\View\Widget\BasicWidget;
+use Cake\View\Widget\TextareaWidget;
 use Cake\View\Form\ContextInterface;
 
 /**
@@ -17,7 +17,7 @@ use Cake\View\Form\ContextInterface;
  * @author Flavius
  * @version 1.0
  */
-class TagWidget extends BasicWidget
+class TagWidget extends TextareaWidget
 {
     // extra file prerequisites
     private $prerequisites = [
