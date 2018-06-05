@@ -38,7 +38,7 @@ class CalendarWidgetTest extends TestCase
             'div' => ['class' => 'calendar-widget'],
                 'input' => [
                     'type' => 'text',
-                    'name' => '_calendar_input_created',
+                    'name' => '_calendar_input_' . $this->data['name'],
                     'readonly' => 'readonly'
                 ],
             '/div'
@@ -57,7 +57,7 @@ class CalendarWidgetTest extends TestCase
             'div' => ['class' => 'calendar-widget'],
                 'input' => [
                     'type' => 'text',
-                    'name' => '_calendar_input_created',
+                    'name' => '_calendar_input_' . $this->data['name'],
                     'readonly' => 'readonly',
                     'value' => $data['val']->format('d-M-Y')
                 ],
@@ -77,7 +77,7 @@ class CalendarWidgetTest extends TestCase
             'div' => ['class' => 'calendar-widget'],
                 'input' => [
                     'type' => 'text',
-                    'name' => '_calendar_input_created',
+                    'name' => '_calendar_input_' . $this->data['name'],
                     'readonly' => 'readonly',
                     'value' => (new FrozenTime($data['val']))->format('d-M-Y')
                 ],
@@ -90,6 +90,6 @@ class CalendarWidgetTest extends TestCase
         $input = new CalendarWidget($this->templates);
 
         $this->assertSame(['_calendar_input_'], $input->secureFields([]));
-        $this->assertSame(['_calendar_input_created'], $input->secureFields(['name' => 'created']));
+        $this->assertSame(['_calendar_input_' . $this->data['name']], $input->secureFields(['name' => $this->data['name']]));
     }
 }

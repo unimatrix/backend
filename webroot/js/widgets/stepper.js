@@ -2,7 +2,7 @@
  * Stepper widget
  *
  * @author Flavius
- * @version 1.0
+ * @version 1.1
  */
 if(typeof Widgets === 'undefined') var Widgets = {};
 Widgets.stepper = function() { 'use strict';
@@ -16,20 +16,27 @@ Widgets.stepper = function() { 'use strict';
                 input = parent.find('input'),
                 min = input.data('min') || input.data('min') == 0 ? input.data('min') : -Infinity,
                 max = input.data('max') ? input.data('max') : Infinity,
-                value = parseInt(input.val()) || 0;
+                empty = input.data('empty'),
+                skip = input.data('skip'),
+                value = input.val() == '' ? false : parseInt(input.val());
 
             // on button action
             switch(self.hasClass('add') ? '+' : '-') {
                 // add
                 case '+':
-                    var calc = value + 1;
+                    if(value === false)
+                        value = min ? min - 1 : 0;
+
+                    var calc = value + (skip ? skip : 1);
                     input.val(calc > max ? max : calc);
                 break;
 
                 // subtract
                 case '-':
-                    var calc = value - 1;
-                    input.val(calc < min ? min : calc);
+                    if(value !== false) {
+                        var calc = value - (skip ? skip : 1);
+                        input.val(calc < min ? (empty ? '' : min) : calc);
+                    }
                 break;
             }
 

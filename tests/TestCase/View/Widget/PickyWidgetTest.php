@@ -26,7 +26,7 @@ class PickyWidgetTest extends TestCase
 		$helper = new BackendHelper($view);
 		$this->data = [
 		    'view' => $helper->getView(),
-		    'name' => 'picky'
+		    'name' => 'selector'
 		];
     }
 
@@ -56,7 +56,7 @@ class PickyWidgetTest extends TestCase
 
         $expected = [
             ['div' => ['class' => 'picky-widget']],
-                'input' => ['type' => 'hidden', 'name' => 'picky[]', 'value' => '_to_empty_array_'],
+                'input' => ['type' => 'hidden', 'name' => $this->data['name'] . '[]', 'value' => '_to_empty_array_'],
                 ['div' => ['class' => 'list']],
                     '<pick',
                         ['div' => true],
@@ -103,7 +103,7 @@ class PickyWidgetTest extends TestCase
 
         $expected = [
             ['div' => ['class' => 'picky-widget']],
-                'input' => ['type' => 'hidden', 'name' => 'picky[]', 'value' => $data['val'][0]],
+                'input' => ['type' => 'hidden', 'name' => $this->data['name'] . '[]', 'value' => $data['val'][0]],
                 ['div' => ['class' => 'list']],
                     'pick' => ['class' => 'active'],
                         ['div' => true],
@@ -128,7 +128,7 @@ class PickyWidgetTest extends TestCase
 
         $expected = [
             ['div' => ['class' => 'picky-widget']],
-                'input' => ['type' => 'hidden', 'name' => 'picky[]', 'value' => $data['val'][0]],
+                'input' => ['type' => 'hidden', 'name' => $this->data['name'] . '[]', 'value' => $data['val'][0]],
                 ['div' => ['class' => 'list']],
                     ['pick' => ['class' => 'active']],
                         ['div' => true],
@@ -160,8 +160,8 @@ class PickyWidgetTest extends TestCase
 
         $expected = [
             ['div' => ['class' => 'picky-widget']],
-                ['input' => ['type' => 'hidden', 'name' => 'picky[]', 'value' => $data['val'][0]]],
-                ['input' => ['type' => 'hidden', 'name' => 'picky[]', 'value' => $data['val'][1]]],
+                ['input' => ['type' => 'hidden', 'name' => $this->data['name'] . '[]', 'value' => $data['val'][0]]],
+                ['input' => ['type' => 'hidden', 'name' => $this->data['name'] . '[]', 'value' => $data['val'][1]]],
                 ['div' => ['class' => 'list']],
                     ['pick' => ['class' => 'active']],
                         ['div' => true],

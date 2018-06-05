@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2018-02-21 15:43+0200\n"
+"POT-Creation-Date: 2018-06-05 19:39+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -105,6 +105,10 @@ msgstr "Generat în"
 #: /View/Widget/MediaWidget.php:75
 msgid "Full Image"
 msgstr "Toată Imaginea"
+
+#: /View/Widget/StepperWidget.php:78
+msgid "Please select a value"
+msgstr "Selectează o valoare"
 
 #: /View/Widget/TagWidget.php:69
 msgid "Or select some from this list:"

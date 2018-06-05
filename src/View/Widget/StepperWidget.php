@@ -12,10 +12,16 @@ use Cake\View\Form\ContextInterface;
  *
  * Example:
  * ---------------------------------------------------------------------------------
- * echo $this->Form->control('date3', ['type' => 'stepper', 'min' => '1', 'max' => '10', 'empty' => 'Please select a value', 'suffix' => 'room|rooms']);
+ * echo $this->Form->control('date3', ['type' => 'stepper',
+ *     'min' => '1', // optional, defaults to 0
+ *     'max' => '10',
+ *     'skip' => '2', // optional, how many steps should it skip when you press the + / - buttons
+ *     'empty' => 'Please select a value', // defaults to this text, you can also specify it but leave it empty
+ *     'suffix' => 'room|rooms'
+ * ]);
  *
  * @author Flavius
- * @version 1.0
+ * @version 1.1
  */
 class StepperWidget extends BasicWidget
 {
@@ -60,8 +66,11 @@ class StepperWidget extends BasicWidget
         // defaults
         $data += [
             'name' => '',
+            'val' => null,
             'readonly' => true,
-            'templateVars' => []
+            'templateVars' => [],
+            'min' => 0,
+            'empty' => __d('Unimatrix/backend', 'Please select a value')
         ];
 
         // require prerequisites
@@ -83,7 +92,7 @@ class StepperWidget extends BasicWidget
             'templateVars' => $data['templateVars'],
             'attrs' => $dataAttrs . $this->_templates->formatAttributes(
                 $data,
-                ['name', 'type', 'min', 'max', 'empty', 'suffix']
+                ['name', 'type', 'min', 'max', 'skip', 'empty', 'suffix']
             ),
         ]);
 

@@ -32,7 +32,7 @@ class MediaWidgetTest extends TestCase
 		$helper = new BackendHelper($view);
 		$this->data = [
 		    'view' => $helper->getView(),
-		    'name' => 'media'
+		    'name' => 'gallery'
 		];
     }
 
@@ -60,7 +60,7 @@ class MediaWidgetTest extends TestCase
                         '/i',
                     '/media',
                 '/div',
-                'input' => ['type' => 'hidden', 'name' => 'media'],
+                'input' => ['type' => 'hidden', 'name' => $this->data['name']],
                 '<script',
                     'var CKFINDER_BASEPATH=\'/unimatrix/backend/js/scripts/ckfinder/\'',
                 '/script',
@@ -90,7 +90,7 @@ class MediaWidgetTest extends TestCase
                         '/i',
                     '/media',
                 '/div',
-                'input' => ['type' => 'hidden', 'name' => 'media', 'value' => $data['val']],
+                'input' => ['type' => 'hidden', 'name' => $this->data['name'], 'value' => $data['val']],
                 '<script',
                     'var CKFINDER_BASEPATH=\'/unimatrix/backend/js/scripts/ckfinder/\'',
                 '/script',
@@ -120,7 +120,7 @@ class MediaWidgetTest extends TestCase
                         '/i',
                     '/media',
                 '/div',
-                'input' => ['type' => 'hidden', 'name' => 'media[]', 'value' => '_to_empty_array_'],
+                'input' => ['type' => 'hidden', 'name' => $this->data['name'] . '[]', 'value' => '_to_empty_array_'],
                 '<script',
                     'var CKFINDER_BASEPATH=\'/unimatrix/backend/js/scripts/ckfinder/\'',
                 '/script',
@@ -174,7 +174,7 @@ class MediaWidgetTest extends TestCase
                         '/i',
                     '/media',
                 '/div',
-                'input' => ['type' => 'hidden', 'name' => 'media[]', 'value' => $data['val'][0]],
+                'input' => ['type' => 'hidden', 'name' => $this->data['name'] . '[]', 'value' => $data['val'][0]],
                 '<script',
                     'var CKFINDER_BASEPATH=\'/unimatrix/backend/js/scripts/ckfinder/\'',
                 '/script',
@@ -228,8 +228,8 @@ class MediaWidgetTest extends TestCase
                         '/i',
                     '/media',
                 '/div',
-                ['input' => ['type' => 'hidden', 'name' => 'media[]', 'value' => $data['val'][0]]],
-                ['input' => ['type' => 'hidden', 'name' => 'media[]', 'value' => $data['val'][1]]],
+                ['input' => ['type' => 'hidden', 'name' => $this->data['name'] . '[]', 'value' => $data['val'][0]]],
+                ['input' => ['type' => 'hidden', 'name' => $this->data['name'] . '[]', 'value' => $data['val'][1]]],
                 '<script',
                     'var CKFINDER_BASEPATH=\'/unimatrix/backend/js/scripts/ckfinder/\'',
                 '/script',
