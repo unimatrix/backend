@@ -183,7 +183,7 @@ class MediaWidgetTest extends TestCase
         $this->assertHtml($expected, $result);
     }
 
-    public function testWidgetHtmlMultipleWithTwoValue() {
+    public function testWidgetHtmlMultipleWithTwoValues() {
         $text = new MediaWidget($this->templates);
         $data = $this->data + [
             'multiple' => true,

@@ -17,7 +17,7 @@ use RuntimeException;
  * echo $this->Form->control('pick', ['type' => 'picky', 'list' => ['item1', 'item2', 'item3', 'item4']])
  *
  * @author Flavius
- * @version 1.1
+ * @version 1.2
  */
 class PickyWidget extends BasicWidget
 {
@@ -66,12 +66,17 @@ class PickyWidget extends BasicWidget
             $data['val'] = [];
 
         // picky errors? throw exceptions
-        if(!$data['list'])
+        if(!isset($data['list']) || !$data['list'])
             throw new RuntimeException("Picky Widget: '{$data['name']}' must contain a list of an array with values to choose from");
         if(!is_array($data['list']))
             throw new RuntimeException("Picky Widget: '{$data['name']}' list is not an array");
         if(!is_array($data['val']))
             throw new RuntimeException("Picky Widget: '{$data['name']}' value is not an array");
+
+        // value not in list? throw exceptions
+        foreach($data['val'] as $value)
+            if(!in_array($value, $data['list']))
+                throw new RuntimeException("Picky Widget: '{$value}' value does not belong to the list: [" . implode(', ', $data['list']) . "]");
 
         // require prerequisites
         $this->require($data['view']);

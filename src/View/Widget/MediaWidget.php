@@ -68,14 +68,13 @@ class MediaWidget extends BasicWidget
      * Create item
      * @param View $view
      * @param string $value
-     * @param bool $new
      * @return string
      */
-    protected function item(View $view, $value, $new = false) {
+    protected function item(View $view, $value) {
         // create item
-        $out = '<media id="' . Text::uuid(). '"' . ($new ? " class='new'" : null) . '>';
-        $out .= $view->Html->image($new ? 'Unimatrix/Backend.widgets/media-plus.png' : $value);
-        $out .= $view->Html->link('<i class="fa fa-eye" aria-hidden="true"></i>' . __d('Unimatrix/backend', 'Full Image'), $new ? '#' : $value, ['escape' => false, 'target' => '_blank']);
+        $out = '<media id="' . Text::uuid(). '"' . ($value ? null : " class='new'") . '>';
+        $out .= $view->Html->image($value ? $value : 'Unimatrix/Backend.widgets/media-plus.png');
+        $out .= $view->Html->link('<i class="fa fa-eye" aria-hidden="true"></i>' . __d('Unimatrix/backend', 'Full Image'), $value ? $value : '#', ['escape' => false, 'target' => '_blank']);
         $out .= '<i class="fa fa-times" aria-hidden="true"></i>';
         $out .= '</media>';
 
@@ -139,17 +138,17 @@ class MediaWidget extends BasicWidget
             // loop through existing data and add items
             if($hval) {
                 foreach($hval as $item) {
-                    $list .= $this->item($data['view'], $item, false);
+                    $list .= $this->item($data['view'], $item);
                     $inputs .= $this->input($data['name'], $item, true);
                 }
             } else $inputs .= $this->input($data['name'], false, true);
 
             // add the empty item
-            $list .= $this->item($data['view'], null, true);
+            $list .= $this->item($data['view'], null);
 
         // solo
         } else {
-            $list .= $this->item($data['view'], $hval, $hval ? false : true);
+            $list .= $this->item($data['view'], $hval);
             $inputs .= $this->input($data['name'], $hval);
         }
 
