@@ -69,6 +69,7 @@ class UploadWidget extends FileWidget
         // default options
         $data += [
             'name' => '',
+            'val' => null,
             'escape' => true,
             'templateVars' => [],
         ];
