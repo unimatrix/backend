@@ -50,9 +50,9 @@ class WysiwygMiddleware
     private function isCKFinder($url) {
         // match wysiwyg path
         if(strpos($url, 'ckfinder/core/connector/php/connector.php') !== false) {
-            $assetFile = $this->_getAssetFile($url);
-            if($assetFile !== null && file_exists($assetFile))
-                return $assetFile;
+            $pluginFile = $this->_getPluginFile($url);
+            if($pluginFile !== null && file_exists($pluginFile))
+                return $pluginFile;
         }
 
         // nope
@@ -60,11 +60,11 @@ class WysiwygMiddleware
     }
 
     /**
-     * Builds asset file path based off url
-     * @param string $url Asset URL
-     * @return string Absolute path for asset file
+     * Builds plugin file path based off url
+     * @param string $url Plugin URL
+     * @return string Absolute path for plugin file
      */
-    protected function _getAssetFile($url) {
+    protected function _getPluginFile($url) {
         $parts = explode('/', ltrim($url, '/'));
         $pluginPart = [];
         for($i = 0; $i < 2; $i++) {

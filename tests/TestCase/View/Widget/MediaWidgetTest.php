@@ -96,7 +96,7 @@ class MediaWidgetTest extends TestCase
                 '/script',
             '/div'
         ];
-        $this->assertHtml($expected, $result, true);
+        $this->assertHtml($expected, $result);
     }
 
     public function testWidgetHtmlMultipleNoValue() {

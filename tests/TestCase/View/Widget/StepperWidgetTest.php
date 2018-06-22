@@ -48,7 +48,7 @@ class StepperWidgetTest extends TestCase
                 '/span',
             '/div'
         ];
-        $this->assertHtml($expected, $result, true);
+        $this->assertHtml($expected, $result);
     }
 
     public function testWidgetHtmlFull() {
